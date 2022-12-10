@@ -14,7 +14,6 @@ import { dijkstra } from "../algorithms/dijkstra";
 const row = 20;
 const col = 30;
 const PathVisualizer = () => {
-  const [reRenderCounter, setReRenderCounter] = useState<number>(0);
   const [startNodeId, setStartNodeId] = useState<number>(15);
   const [endNodeId, setEndNodeId] = useState<number>(row * col - 20);
 
@@ -25,7 +24,7 @@ const PathVisualizer = () => {
 
   useEffect(() => {
     let [updatedGraph, path] = dijkstra(graph, startNodeId, endNodeId);
-    setReRenderCounter((value) => value + 1);
+    setGraph(updatedGraph);
     setPath(path);
   }, [startNodeId, endNodeId]);
 
@@ -40,6 +39,7 @@ const PathVisualizer = () => {
   const onDragEnter = useCallback((e: React.DragEvent, idx: number) => {
     if (drawWall.current) {
       const updatedGraph = graph.changeNodeToWall(idx);
+      if (updatedGraph) setGraph(updatedGraph);
     } else {
       currentDragHoverElement.current = idx;
     }
@@ -83,7 +83,7 @@ const PathVisualizer = () => {
         {graph.matrix.map((row) =>
           row.map((node) => (
             <Node
-              key={`${node.id}`}
+              key={`node-${node.id}`}
               node={node}
               path={path}
               isStartNode={node.id === startNodeId}

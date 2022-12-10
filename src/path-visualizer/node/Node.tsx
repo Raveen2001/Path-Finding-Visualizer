@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import cn from "classnames";
 import { NodeModel } from "../../models/NodeModel";
 import { ReactComponent as StartIcon } from "../../assets/start.svg";
 import { ReactComponent as EndIcon } from "../../assets/finish.svg";
 import "./Node.scss";
+import { max } from "lodash";
 
 interface INode {
   node: NodeModel;
@@ -33,35 +34,44 @@ const Node: React.FC<INode> = ({
   onDragEnd,
 }) => {
   const nodeRef = useRef<HTMLDivElement>(null);
-  const isFirstRender = useRef<boolean>(true);
+  const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
 
   useEffect(() => {
-    // if (node.id === 0) console.log("hello");
+    console.log(isFirstRender);
+    if (isFirstRender) return;
+    const isNodeVisited = Number.isFinite(node.distance);
+    if (isNodeVisited) {
+      nodeRef.current?.classList.add("visited");
+    } else {
+      nodeRef.current?.classList.remove("visited");
+    }
+  }, [path.join(",")]);
+
+  useEffect(() => {
+    if (node.id === 0) console.log("creating", isFirstRender);
     const isNodeVisited = Number.isFinite(node.distance);
     nodeRef.current?.classList.remove("visited");
     let timeoutId: number | undefined = undefined;
     if (isNodeVisited) {
       const time = node.animationLevel * 100;
+      // if (isStartNode) alert("started");
       timeoutId = setTimeout(() => {
         nodeRef.current?.classList.add("visited");
+
+        setIsFirstRender(false);
+
+        console.log("first render completed");
       }, time);
+    } else {
+      setIsFirstRender(false);
     }
 
-    isFirstRender.current = false;
-
-    return () => clearTimeout(timeoutId);
-  }, [path.length]);
-
-  // useEffect(() => {
-  //   if (isFirstRender.current) return;
-
-  //   const isNodeVisited = Number.isFinite(node.distance);
-  //   if (isNodeVisited) {
-  //     nodeRef.current?.classList.add("visited");
-  //   } else {
-  //     nodeRef.current?.classList.remove("visited");
-  //   }
-  // }, [node.distance]);
+    return () => {
+      if (node.id === 0) console.log("destroying");
+      clearTimeout(timeoutId);
+      setIsFirstRender(true);
+    };
+  }, []);
 
   return (
     <div
@@ -80,6 +90,7 @@ const Node: React.FC<INode> = ({
           end: isEndNode,
           start: isStartNode,
         })}
+        id={`node-${node.id}`}
         ref={nodeRef}
       >
         {isStartNode && <StartIcon fill="white" />}
