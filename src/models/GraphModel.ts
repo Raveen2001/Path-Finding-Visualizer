@@ -1,10 +1,7 @@
 import { NodeModel } from ".";
-import _, { forEach } from "lodash";
-import { immerable, produce } from "immer";
+import _ from "lodash";
 
 export class GraphModel {
-  [immerable] = true;
-
   graphMatrix: NodeModel[][];
 
   public constructor(row: number, col: number) {
@@ -29,11 +26,21 @@ export class GraphModel {
     const [rowIdx, colIdx] = nodePosition;
 
     const node = this.graphMatrix[rowIdx][colIdx];
+    node.changeDistance(distance);
 
-    return produce(this, (draft) => {
-      node.changeDistance(distance);
-      draft.graphMatrix[rowIdx][colIdx] = node;
-    });
+    return this.clone();
+  }
+
+  public changeNodeToWall(id: number) {
+    const nodePosition = this.getNodePosition(id);
+    if (nodePosition === null) return;
+
+    const [rowIdx, colIdx] = nodePosition;
+
+    const node = this.graphMatrix[rowIdx][colIdx];
+
+    node.changeToWall();
+    return this.clone();
   }
 
   private buildGraph(row: number, col: number) {
@@ -73,5 +80,9 @@ export class GraphModel {
     if (colIdx < matrix[0].length - 1) {
       node.addAdjacentNode(matrix[rowIdx][colIdx + 1]);
     }
+  }
+
+  private clone(): GraphModel {
+    return Object.assign(Object.create(Object.getPrototypeOf(this)), this);
   }
 }
