@@ -2,16 +2,16 @@ import { NodeModel } from ".";
 import _ from "lodash";
 
 export class GraphModel {
-  graphMatrix: NodeModel[][];
+  matrix: NodeModel[][];
 
   public constructor(row: number, col: number) {
-    this.graphMatrix = this.buildGraph(row, col);
+    this.matrix = this.buildGraph(row, col);
   }
 
   private getNodePosition(id: number): number[] | null {
-    for (let i = 0; i < this.graphMatrix.length; i++) {
-      for (let j = 0; j < this.graphMatrix[0].length; j++) {
-        if (this.graphMatrix[i][j].id == id) {
+    for (let i = 0; i < this.matrix.length; i++) {
+      for (let j = 0; j < this.matrix[0].length; j++) {
+        if (this.matrix[i][j].id == id) {
           return [i, j];
         }
       }
@@ -25,8 +25,8 @@ export class GraphModel {
 
     const [rowIdx, colIdx] = nodePosition;
 
-    const node = this.graphMatrix[rowIdx][colIdx];
-    node.changeDistance(distance);
+    const node = this.matrix[rowIdx][colIdx];
+    node.setDistance(distance);
 
     return this.clone();
   }
@@ -37,10 +37,29 @@ export class GraphModel {
 
     const [rowIdx, colIdx] = nodePosition;
 
-    const node = this.graphMatrix[rowIdx][colIdx];
+    const node = this.matrix[rowIdx][colIdx];
 
     node.changeToWall();
     return this.clone();
+  }
+
+  public prepareMatrixForAlgorithm(startId: number): NodeModel | null {
+    let startNode = null;
+    for (let i = 0; i < this.matrix.length; i++) {
+      for (let j = 0; j < this.matrix[0].length; j++) {
+        const isStartingNode = this.matrix[i][j].id == startId;
+        if (isStartingNode) {
+          this.matrix[i][j].setDistance(0);
+          startNode = this.matrix[i][j];
+        } else {
+          this.matrix[i][j].setDistance(Infinity);
+        }
+
+        this.matrix[i][j].setPreviousNode(null);
+      }
+    }
+
+    return startNode;
   }
 
   private buildGraph(row: number, col: number) {
@@ -82,7 +101,7 @@ export class GraphModel {
     }
   }
 
-  private clone(): GraphModel {
+  public clone(): GraphModel {
     return Object.assign(Object.create(Object.getPrototypeOf(this)), this);
   }
 }

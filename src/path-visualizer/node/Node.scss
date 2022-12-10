@@ -16,11 +16,15 @@
   }
 
   .start {
-    background-color: green;
+    background-color: green !important;
+  }
+
+  .path-node {
+    background-color: blueviolet !important;
   }
 
   .end {
-    background-color: red;
+    background-color: red !important;
   }
 
   .wall {

@@ -8,17 +8,26 @@ import React, {
 import Node from "./node/Node";
 import _ from "lodash";
 import "./PathVisualizer.scss";
-import { GraphModel } from "../models";
+import { GraphModel, NodeModel } from "../models";
+import { dijkstra } from "../algorithms/dijkstra";
 
 const row = 20;
 const col = 30;
 const PathVisualizer = () => {
+  const [reRenderCounter, setReRenderCounter] = useState<number>(0);
   const [startNodeId, setStartNodeId] = useState<number>(15);
   const [endNodeId, setEndNodeId] = useState<number>(row * col - 20);
 
   const [graph, setGraph] = useState<GraphModel>(new GraphModel(row, col));
+  const [path, setPath] = useState<NodeModel[]>([]);
   const currentDragHoverElement = useRef<number>();
   const drawWall = useRef(false);
+
+  useEffect(() => {
+    let [updatedGraph, path] = dijkstra(graph, startNodeId, endNodeId);
+    setReRenderCounter((value) => value + 1);
+    setPath(path);
+  }, [startNodeId, endNodeId]);
 
   const onDragStart = useCallback(
     (e: React.DragEvent, isStartNode?: boolean, isEndNode?: boolean) => {
@@ -31,7 +40,6 @@ const PathVisualizer = () => {
   const onDragEnter = useCallback((e: React.DragEvent, idx: number) => {
     if (drawWall.current) {
       const updatedGraph = graph.changeNodeToWall(idx);
-      if (updatedGraph) setGraph(updatedGraph);
     } else {
       currentDragHoverElement.current = idx;
     }
@@ -72,11 +80,12 @@ const PathVisualizer = () => {
   return (
     <div className="Path-Visualizer">
       <div className="canvas">
-        {graph.graphMatrix.map((row) =>
+        {graph.matrix.map((row) =>
           row.map((node) => (
             <Node
+              key={`${node.id}`}
               node={node}
-              key={node.id}
+              path={path}
               isStartNode={node.id === startNodeId}
               isEndNode={node.id === endNodeId}
               onDragStart={onDragStart}

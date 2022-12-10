@@ -3,28 +3,42 @@ export class NodeModel {
   distance: number;
   adjacentNodes: NodeModel[];
   isWall: boolean;
+  weight: number;
+  previousNode: NodeModel | null;
+  animationLevel: number;
 
   public constructor(id: number) {
     this.id = id;
-    this.distance = NaN;
+    this.distance = Infinity;
     this.adjacentNodes = [];
     this.isWall = false;
+    this.weight = 1;
+    this.animationLevel = 0;
+    this.previousNode = null;
   }
 
   public addAdjacentNode(node: NodeModel) {
     this.adjacentNodes.push(node);
-    return this;
   }
 
-  public clearAdjacentNodes() {
-    this.adjacentNodes = [];
+  public update(previousNode: NodeModel) {
+    const updatedDistance = previousNode.distance + this.weight;
+    if (this.distance > updatedDistance) {
+      this.distance = updatedDistance;
+      this.previousNode = previousNode;
+      this.animationLevel = previousNode.animationLevel + 1;
+    }
   }
 
-  public changeDistance(distance: number) {
+  public setDistance(distance: number) {
     this.distance = distance;
   }
 
   public changeToWall() {
     this.isWall = true;
+  }
+
+  public setPreviousNode(node: NodeModel | null) {
+    this.previousNode = node;
   }
 }
