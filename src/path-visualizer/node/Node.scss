@@ -1,0 +1,25 @@
+@use "/src/variables.scss" as *;
+.Node {
+  width: 30px;
+  height: 30px;
+
+  .bg {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $background-color;
+  }
+  .visited {
+    background-color: aqua;
+  }
+
+  .start {
+    background-color: green;
+  }
+
+  .end {
+    background-color: red;
+  }
+}

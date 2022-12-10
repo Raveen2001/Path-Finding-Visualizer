@@ -1,0 +1,14 @@
+@use "../variables.scss" as *;
+
+.Path-Visualizer {
+  .canvas {
+    margin: auto;
+    background-color: $color;
+    width: fit-content;
+    display: grid;
+    gap: $gap;
+    padding: $gap;
+    grid-template-columns: repeat($columns, 1fr);
+    grid-template-rows: repeat($rows, 1fr);
+  }
+}
