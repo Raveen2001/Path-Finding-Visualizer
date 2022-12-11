@@ -41,4 +41,8 @@ export class NodeModel {
   public setPreviousNode(node: NodeModel | null) {
     this.previousNode = node;
   }
+
+  public setAnimationLevel(level: number) {
+    this.animationLevel = level;
+  }
 }

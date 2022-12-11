@@ -28,6 +28,7 @@ const Canvas = () => {
 
   const onDragStart = useCallback(
     (e: React.DragEvent, isStartNode?: boolean, isEndNode?: boolean) => {
+      e.stopPropagation();
       if (isStartNode || isEndNode) drawWall.current = false;
       else drawWall.current = true;
     },
@@ -70,7 +71,6 @@ const Canvas = () => {
       if (updatedGraph) setGraph(updatedGraph);
 
       currentDragHoverElement.current = undefined;
-      drawWall.current = false;
     },
     []
   );

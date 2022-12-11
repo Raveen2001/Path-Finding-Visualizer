@@ -48,8 +48,10 @@ const Node: React.FC<INode> = ({
 
     if (isNodeVisited && !isStartNode && !isEndNode) {
       const time = node.animationLevel * 100;
+      console.log("timeout assigned", time);
       let timeoutId = setTimeout(() => {
         nodeRef.current?.classList.add("spread-animation");
+        console.log("animation start");
       }, time);
 
       timeoutIds.push(timeoutId);
@@ -70,7 +72,7 @@ const Node: React.FC<INode> = ({
     return () => {
       timeoutIds.map((id) => clearTimeout(id));
     };
-  }, [path.join(",")]);
+  }, [isStartNode, isEndNode, path]);
 
   return (
     <div

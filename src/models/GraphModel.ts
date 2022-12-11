@@ -45,6 +45,7 @@ export class GraphModel {
 
   public prepareMatrixForAlgorithm(startId: number): NodeModel | null {
     let startNode = null;
+
     for (let i = 0; i < this.matrix.length; i++) {
       for (let j = 0; j < this.matrix[0].length; j++) {
         const isStartingNode = this.matrix[i][j].id == startId;
@@ -56,6 +57,7 @@ export class GraphModel {
         }
 
         this.matrix[i][j].setPreviousNode(null);
+        this.matrix[i][j].setAnimationLevel(0);
       }
     }
 

@@ -15,13 +15,12 @@ export const dijkstra = (
     while (queue.length > 0) {
       const node = queue.shift() as NodeModel;
       if (node.id == endId) {
-        let targetNode = node;
-        // targetNode.update(node);
-        while (targetNode.previousNode != null) {
-          path.push(targetNode);
-          targetNode = targetNode.previousNode;
+        let currentNode = node;
+
+        while (currentNode.previousNode != null) {
+          path.unshift(currentNode);
+          currentNode = currentNode.previousNode;
         }
-        path = path.reverse();
         break;
       }
 
