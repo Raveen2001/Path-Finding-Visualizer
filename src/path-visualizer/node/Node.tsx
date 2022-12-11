@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import cn from "classnames";
 import { NodeModel } from "../../models/NodeModel";
-import { ReactComponent as StartIcon } from "../../assets/start.svg";
-import { ReactComponent as EndIcon } from "../../assets/finish.svg";
+import { ReactComponent as StartIcon } from "../../assets/svg/start.svg";
+import { ReactComponent as EndIcon } from "../../assets/svg/finish.svg";
 import "./Node.scss";
-import { max } from "lodash";
 
 interface INode {
   node: NodeModel;
@@ -36,16 +35,16 @@ const Node: React.FC<INode> = ({
   const nodeRef = useRef<HTMLDivElement>(null);
   const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
 
-  useEffect(() => {
-    console.log(isFirstRender);
-    if (isFirstRender) return;
-    const isNodeVisited = Number.isFinite(node.distance);
-    if (isNodeVisited) {
-      nodeRef.current?.classList.add("visited");
-    } else {
-      nodeRef.current?.classList.remove("visited");
-    }
-  }, [path.join(",")]);
+  // useEffect(() => {
+  //   console.log(isFirstRender);
+  //   if (isFirstRender) return;
+  //   const isNodeVisited = Number.isFinite(node.distance);
+  //   if (isNodeVisited) {
+  //     nodeRef.current?.classList.add("visited");
+  //   } else {
+  //     nodeRef.current?.classList.remove("visited");
+  //   }
+  // }, [path.join(",")]);
 
   useEffect(() => {
     if (node.id === 0) console.log("creating", isFirstRender);
@@ -54,7 +53,6 @@ const Node: React.FC<INode> = ({
     let timeoutId: number | undefined = undefined;
     if (isNodeVisited) {
       const time = node.animationLevel * 100;
-      // if (isStartNode) alert("started");
       timeoutId = setTimeout(() => {
         nodeRef.current?.classList.add("visited");
 
@@ -71,7 +69,7 @@ const Node: React.FC<INode> = ({
       clearTimeout(timeoutId);
       setIsFirstRender(true);
     };
-  }, []);
+  }, [path.join(",")]);
 
   return (
     <div
@@ -93,8 +91,8 @@ const Node: React.FC<INode> = ({
         id={`node-${node.id}`}
         ref={nodeRef}
       >
-        {isStartNode && <StartIcon fill="white" />}
-        {isEndNode && <EndIcon fill="white" />}
+        {isStartNode && <StartIcon fill="#282a36" />}
+        {isEndNode && <EndIcon fill="#282a36" />}
       </div>
     </div>
   );

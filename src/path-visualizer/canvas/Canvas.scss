@@ -1,0 +1,14 @@
+@use "/src/variables.scss" as *;
+
+.Canvas {
+  margin: auto;
+  background-color: $background-color;
+  width: fit-content;
+  display: grid;
+  gap: $gap;
+  padding: $gap;
+  height: min-content;
+  overflow: hidden;
+  grid-template-columns: repeat($columns, 1fr);
+  grid-template-rows: repeat($rows, 1fr);
+}

@@ -1,0 +1,34 @@
+@use "/src/variables.scss" as *;
+
+.Top-Menu {
+  height: $top-menu-height;
+  max-height: $top-menu-height;
+  background-color: $top-menu-color;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+
+  .logo {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    img {
+      margin: auto;
+    }
+  }
+
+  .menu {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .start-visualization-btn {
+    border: none;
+    margin: 0;
+    width: 10rem;
+    height: 2rem;
+    background-color: red;
+  }
+}

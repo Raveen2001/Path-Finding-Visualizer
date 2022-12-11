@@ -1,9 +1,15 @@
 import { useEffect } from "react";
-import "./App.scss";
+import PathVisualizerProvider from "./context/PathVisualizerProvider";
 import PathVisualizer from "./path-visualizer/PathVisualizer";
 
 function App() {
-  return <div className="App">{<PathVisualizer />}</div>;
+  return (
+    <div className="App">
+      <PathVisualizerProvider>
+        <PathVisualizer />
+      </PathVisualizerProvider>
+    </div>
+  );
 }
 
 export default App;

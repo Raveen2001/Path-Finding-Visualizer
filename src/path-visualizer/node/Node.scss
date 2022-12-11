@@ -2,32 +2,31 @@
 .Node {
   width: 30px;
   height: 30px;
-
   .bg {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: $background-color;
+    background-color: $canvas-background-color;
   }
   .visited {
-    background-color: aqua;
+    background-color: $node-visited-color;
   }
 
   .start {
-    background-color: green !important;
+    background-color: $node-start-color !important;
   }
 
   .path-node {
-    background-color: blueviolet !important;
+    background-color: $node-path-color !important;
   }
 
   .end {
-    background-color: red !important;
+    background-color: $node-end-color !important;
   }
 
   .wall {
-    background-color: cornflowerblue;
+    background-color: $node-wall-color !important;
   }
 }
