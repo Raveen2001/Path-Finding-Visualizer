@@ -44,15 +44,18 @@ const Node: React.FC<INode> = ({
     );
 
     const isNodeVisited = Number.isFinite(node.distance);
+    const isWeightedNode = node.weight > 1;
     const timeoutIds: number[] = [];
 
     if (isNodeVisited && !isStartNode && !isEndNode) {
-      const time = node.animationLevel * 100;
-      let timeoutId = setTimeout(() => {
-        nodeRef.current?.classList.add("spread-animation");
-      }, time);
+      if (!isWeightedNode) {
+        const time = node.animationLevel * 100;
+        let timeoutId = setTimeout(() => {
+          nodeRef.current?.classList.add("spread-animation");
+        }, time);
 
-      timeoutIds.push(timeoutId);
+        timeoutIds.push(timeoutId);
+      }
 
       if (path.includes(node)) {
         const timeForSpreadAnimation =
@@ -60,6 +63,7 @@ const Node: React.FC<INode> = ({
         const pathTime = timeForSpreadAnimation + node.animationLevel * 100;
 
         let timeoutId = setTimeout(() => {
+          nodeRef.current?.classList.remove("wall", "weighted");
           nodeRef.current?.classList.add("path-node", "path-animation");
         }, pathTime);
 
@@ -84,6 +88,7 @@ const Node: React.FC<INode> = ({
       <div
         className={cn("bg", {
           wall: node.isWall,
+          weighted: node.weight > 1,
           end: isEndNode,
           start: isStartNode,
         })}
@@ -92,6 +97,7 @@ const Node: React.FC<INode> = ({
       >
         {isStartNode && <StartIcon fill="#282a36" />}
         {isEndNode && <EndIcon fill="#282a36" />}
+        {node.weight > 1 && <span>{node.weight}</span>}
       </div>
     </div>
   );

@@ -4,9 +4,11 @@ import Node from "../node/Node";
 import "./Legends.scss";
 
 const Legends = () => {
-  const VisitedNode = useMemo(() => new NodeModel(-1).setDistance(1), []);
+  const visitedNode = useMemo(() => new NodeModel(-1).setDistance(1), []);
   const pathNode = useMemo(() => new NodeModel(-1).setDistance(1), []);
   const node = useMemo(() => new NodeModel(-1), []);
+  const wallNode = useMemo(() => new NodeModel(-1).changeToWall(), []);
+  const weightedNode = useMemo(() => new NodeModel(-1).addRandomWeight(), []);
   const path = useMemo(() => [pathNode], []);
   const emptyPath = useMemo(() => [], []);
 
@@ -39,8 +41,16 @@ const Legends = () => {
         <span>Path Node</span>
       </div>
       <div className="legend">
-        <Node node={VisitedNode} path={path} key={reRender ? 1 : 0} />
+        <Node node={visitedNode} path={path} key={reRender ? 1 : 0} />
         <span>Visiting Node</span>
+      </div>
+      <div className="legend">
+        <Node node={wallNode} path={emptyPath} />
+        <span>Wall Node</span>
+      </div>
+      <div className="legend">
+        <Node node={weightedNode} path={emptyPath} />
+        <span>Weighted Node</span>
       </div>
     </div>
   );

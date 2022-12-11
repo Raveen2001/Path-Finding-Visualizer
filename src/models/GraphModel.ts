@@ -43,6 +43,18 @@ export class GraphModel {
     return this.clone();
   }
 
+  public addWeightToWall(id: number) {
+    const nodePosition = this.getNodePosition(id);
+    if (nodePosition === null) return;
+
+    const [rowIdx, colIdx] = nodePosition;
+
+    const node = this.matrix[rowIdx][colIdx];
+    node.addRandomWeight();
+
+    return this.clone();
+  }
+
   public prepareMatrixForAlgorithm(startId: number): NodeModel | null {
     let startNode = null;
 

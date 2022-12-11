@@ -17,20 +17,18 @@ const Canvas = () => {
     graph,
     setGraph,
     path,
+    updateVisualization,
   } = usePathVisualizerCanvasContext()!;
-
-  const { startVisualization } = usePathVisualizerOptionsContext()!;
 
   const currentDragHoverElement = useRef<number>();
   const drawWall = useRef(false);
 
   useEffect(() => {
-    startVisualization();
+    updateVisualization();
   }, [startNodeId, endNodeId]);
 
   const onDragStart = useCallback(
     (e: React.DragEvent, isStartNode?: boolean, isEndNode?: boolean) => {
-      e.stopPropagation();
       if (isStartNode || isEndNode) drawWall.current = false;
       else drawWall.current = true;
     },
@@ -38,8 +36,14 @@ const Canvas = () => {
   );
 
   const onDragEnter = useCallback((e: React.DragEvent, idx: number) => {
+    e.preventDefault();
     if (drawWall.current) {
-      const updatedGraph = graph.changeNodeToWall(idx);
+      let updatedGraph;
+      if (e.shiftKey) {
+        updatedGraph = graph.addWeightToWall(idx);
+      } else {
+        updatedGraph = graph.changeNodeToWall(idx);
+      }
       if (updatedGraph) setGraph(updatedGraph);
     } else {
       currentDragHoverElement.current = idx;
@@ -52,6 +56,7 @@ const Canvas = () => {
       isStartNodeChanged?: boolean,
       isEndNodeChanged?: boolean
     ) => {
+      e.preventDefault();
       if (drawWall.current) return;
 
       const updatedId = currentDragHoverElement.current;

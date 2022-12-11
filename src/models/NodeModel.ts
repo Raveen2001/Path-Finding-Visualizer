@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 export class NodeModel {
   id: number;
   distance: number;
@@ -37,13 +39,26 @@ export class NodeModel {
 
   public changeToWall() {
     this.isWall = true;
+    this.weight = 1;
+    return this;
   }
 
   public setPreviousNode(node: NodeModel | null) {
     this.previousNode = node;
+    return this;
   }
 
   public setAnimationLevel(level: number) {
     this.animationLevel = level;
+    return this;
+  }
+
+  public addRandomWeight() {
+    if (this.weight === 1) {
+      this.weight = _.random(2, 10);
+      this.isWall = false;
+    }
+
+    return this;
   }
 }

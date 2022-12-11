@@ -8,7 +8,7 @@ export type TAlgorithm = {
     graph: GraphModel,
     startNodeId: number,
     endNodeId: number
-  ) => [GraphModel, NodeModel[]];
+  ) => [GraphModel, NodeModel[], number];
 };
 
 export type TSetState<T> = (val: T) => void;
@@ -32,4 +32,6 @@ export interface IPathVisualizerCanvasContext {
 
   path: NodeModel[];
   setPath: TSetState<NodeModel[]>;
+
+  updateVisualization: () => void;
 }

@@ -13,6 +13,7 @@ import {
   IPathVisualizerOptionsContext,
   NodeModel,
 } from "../models";
+import { showToast } from "../utils/toast";
 
 const PathVisualizerOptionsContext =
   createContext<IPathVisualizerOptionsContext | null>(null);
@@ -45,13 +46,33 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
   const [path, setPath] = useState<NodeModel[]>([]);
 
   const startVisualization = useCallback(() => {
-    if (selectedAlgorithmIdx < 0 || selectedAlgorithmIdx >= ALGORITHMS.length)
+    if (selectedAlgorithmIdx < 0 || selectedAlgorithmIdx >= ALGORITHMS.length) {
+      showToast("Please select an algorithm");
       return;
+    }
     const algorithm = ALGORITHMS[selectedAlgorithmIdx].fn;
-    let [updatedGraph, path] = algorithm(graph, startNodeId, endNodeId);
+    let [updatedGraph, path, maxAnimationLevel] = algorithm(
+      graph,
+      startNodeId,
+      endNodeId
+    );
     setGraph(updatedGraph);
     setPath(path);
+
+    if (path.length === 0)
+      setTimeout(
+        () => showToast("No path found"),
+        maxAnimationLevel * 100 + 1000
+      );
   }, [selectedAlgorithmIdx, startNodeId, endNodeId, graph]);
+
+  const updateVisualization = useCallback(() => {
+    if (selectedAlgorithmIdx < 0 || selectedAlgorithmIdx >= ALGORITHMS.length) {
+      return;
+    }
+
+    startVisualization();
+  }, [selectedAlgorithmIdx, startVisualization]);
 
   return (
     <PathVisualizerOptionsContext.Provider
@@ -72,6 +93,7 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
           setGraph,
           path,
           setPath,
+          updateVisualization,
         }}
       >
         {children}

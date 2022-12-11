@@ -17,7 +17,7 @@ export const ALGORITHMS: TAlgorithm[] = [
 export const COLORS = {
   bgDark: "#282a36",
   bgLight: "#383a59",
-  textColor: "#ffb86c",
+  accentColor: "#ffb86c",
   white: "#AFB0B1",
   darkWhite: "#f0f2f5",
   hoverColor: "#262738",

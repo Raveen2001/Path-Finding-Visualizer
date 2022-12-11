@@ -5,8 +5,12 @@ import { usePathVisualizerOptionsContext } from "../../context/PathVisualizerPro
 import "./TopMenu.scss";
 
 const TopMenu = () => {
-  const { algorithms, setSelectedAlgorithmIdx, startVisualization } =
-    usePathVisualizerOptionsContext()!;
+  const {
+    algorithms,
+    selectedAlgorithmIdx,
+    setSelectedAlgorithmIdx,
+    startVisualization,
+  } = usePathVisualizerOptionsContext()!;
 
   const algorithmOptions = useMemo(
     () =>
@@ -36,7 +40,7 @@ const TopMenu = () => {
               ...theme.colors,
               primary25: COLORS.hoverColor,
               primary50: COLORS.holdDownColor,
-              primary: COLORS.textColor,
+              primary: COLORS.accentColor,
               neutral0: COLORS.bgLight,
               neutral80: COLORS.darkWhite,
               neutral60: COLORS.white,

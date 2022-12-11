@@ -4,16 +4,18 @@ export const dijkstra = (
   graph: GraphModel,
   startId: number,
   endId: number
-): [GraphModel, NodeModel[]] => {
+): [GraphModel, NodeModel[], number] => {
   const startNode = graph.prepareMatrixForAlgorithm(startId);
   let path: NodeModel[] = [];
   const visitedNodes = new Set();
+  let maxAnimationLevelReached = 0;
 
   if (startNode) {
     const queue = [startNode];
 
     while (queue.length > 0) {
       const node = queue.shift() as NodeModel;
+      maxAnimationLevelReached = node.animationLevel;
       if (node.id == endId) {
         let currentNode = node;
 
@@ -35,5 +37,5 @@ export const dijkstra = (
     }
   }
 
-  return [graph.clone(), path];
+  return [graph.clone(), path, maxAnimationLevelReached];
 };

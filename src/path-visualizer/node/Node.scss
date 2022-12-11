@@ -50,6 +50,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    span {
+      color: $canvas-background-color;
+    }
   }
 
   .spread-animation {
@@ -68,19 +72,15 @@
     background-color: $node-path-color !important;
   }
 
-  .path-icon {
-    visibility: hidden;
-  }
-
-  .show-icon {
-    animation: showhide 100ms;
-  }
-
   .end {
     background-color: $node-end-color !important;
   }
 
   .wall {
     background-color: $node-wall-color !important;
+  }
+
+  .weighted {
+    background-color: $node-weight-color !important;
   }
 }
