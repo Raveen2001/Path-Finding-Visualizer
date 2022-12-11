@@ -35,7 +35,6 @@ const Canvas = () => {
   );
 
   const onDragEnter = useCallback((e: React.DragEvent, idx: number) => {
-    e.preventDefault();
     if (drawWall.current) {
       let updatedGraph;
       if (e.shiftKey) {
@@ -55,7 +54,6 @@ const Canvas = () => {
       isStartNodeChanged?: boolean,
       isEndNodeChanged?: boolean
     ) => {
-      e.preventDefault();
       if (drawWall.current) return;
 
       const updatedId = currentDragHoverElement.current;
