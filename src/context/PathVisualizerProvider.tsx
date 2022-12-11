@@ -33,7 +33,6 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
   children,
 }) => {
   const [selectedAlgorithmIdx, setSelectedAlgorithmIdx] = useState<number>(-1);
-
   const [startNodeId, setStartNodeId] = useState<number>(
     _.random(0, CONSTANTS.totalNodes)
   );

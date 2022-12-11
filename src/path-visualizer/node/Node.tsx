@@ -9,13 +9,13 @@ import "./Node.scss";
 interface INode {
   node: NodeModel;
   path: NodeModel[];
-  onDragStart: (
+  onDragStart?: (
     e: React.DragEvent,
     isStartNode?: boolean,
     isEndNode?: boolean
   ) => void;
-  onDragEnter: (e: React.DragEvent, idx: number) => void;
-  onDragEnd: (
+  onDragEnter?: (e: React.DragEvent, idx: number) => void;
+  onDragEnd?: (
     e: React.DragEvent,
     isStartNodeChanged?: boolean,
     isEndNodeChanged?: boolean
@@ -48,10 +48,8 @@ const Node: React.FC<INode> = ({
 
     if (isNodeVisited && !isStartNode && !isEndNode) {
       const time = node.animationLevel * 100;
-      console.log("timeout assigned", time);
       let timeoutId = setTimeout(() => {
         nodeRef.current?.classList.add("spread-animation");
-        console.log("animation start");
       }, time);
 
       timeoutIds.push(timeoutId);
@@ -77,10 +75,10 @@ const Node: React.FC<INode> = ({
   return (
     <div
       className="Node"
-      onDragStart={(e) => onDragStart(e, isStartNode, isEndNode)}
+      onDragStart={(e) => onDragStart?.(e, isStartNode, isEndNode)}
       onDragOver={(e) => e.preventDefault()}
-      onDragEnterCapture={(e) => onDragEnter(e, node.id)}
-      onDragEnd={(e) => onDragEnd(e, isStartNode, isEndNode)}
+      onDragEnterCapture={(e) => onDragEnter?.(e, node.id)}
+      onDragEnd={(e) => onDragEnd?.(e, isStartNode, isEndNode)}
       draggable
     >
       <div

@@ -27,7 +27,6 @@ const TopMenu = () => {
         <Select
           options={algorithmOptions}
           onChange={(newValue) => {
-            console.log(newValue?.value ?? -1);
             setSelectedAlgorithmIdx(newValue?.value ?? -1);
           }}
           theme={(theme) => ({

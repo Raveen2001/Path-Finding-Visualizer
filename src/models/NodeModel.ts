@@ -32,6 +32,7 @@ export class NodeModel {
 
   public setDistance(distance: number) {
     this.distance = distance;
+    return this;
   }
 
   public changeToWall() {

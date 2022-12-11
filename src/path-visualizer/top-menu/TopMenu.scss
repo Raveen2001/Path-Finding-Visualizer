@@ -26,11 +26,19 @@
   }
 
   .start-visualization-btn {
-    border: none;
-    margin: 0;
-    width: 10rem;
-    height: 2rem;
     margin-left: auto;
-    background-color: red;
+    width: 200px;
+    background-color: $top-menu-color;
+    border: 2px solid $color;
+    color: $color;
+    font-size: 1rem;
+    padding: 14px 32px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+  .start-visualization-btn:hover {
+    color: white;
+    background-color: $color;
   }
 }

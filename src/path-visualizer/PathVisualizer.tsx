@@ -1,5 +1,6 @@
 import React from "react";
 import Canvas from "./canvas/Canvas";
+import Legends from "./legends/Legends";
 import "./PathVisualizer.scss";
 import TopMenu from "./top-menu/TopMenu";
 const PathVisualizer = () => {
@@ -7,6 +8,7 @@ const PathVisualizer = () => {
     <div className="Path-Visualizer">
       <TopMenu />
       <Canvas />
+      <Legends />
     </div>
   );
 };
