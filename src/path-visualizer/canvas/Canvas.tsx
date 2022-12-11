@@ -1,15 +1,14 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import Node from "../node/Node";
 import _ from "lodash";
 import "./canvas.scss";
-import { dijkstra } from "../../algorithms/dijkstra";
-import {
-  usePathVisualizerCanvasContext,
-  usePathVisualizerOptionsContext,
-} from "../../context/PathVisualizerProvider";
+import { usePathVisualizerCanvasContext } from "../../context/PathVisualizerProvider";
 
 const Canvas = () => {
   const {
+    canvasRef,
+    rows,
+    cols,
     startNodeId,
     setStartNodeId,
     endNodeId,
@@ -21,7 +20,7 @@ const Canvas = () => {
   } = usePathVisualizerCanvasContext()!;
 
   const currentDragHoverElement = useRef<number>();
-  const drawWall = useRef(false);
+  const drawWall = useRef<boolean>(false);
 
   useEffect(() => {
     updateVisualization();
@@ -83,21 +82,29 @@ const Canvas = () => {
   );
 
   return (
-    <div className="Canvas">
-      {graph.matrix.map((row) =>
-        row.map((node) => (
-          <Node
-            key={`node-${node.id}`}
-            node={node}
-            path={path}
-            isStartNode={node.id === startNodeId}
-            isEndNode={node.id === endNodeId}
-            onDragStart={onDragStart}
-            onDragEnter={onDragEnter}
-            onDragEnd={onDragEnd}
-          />
-        ))
-      )}
+    <div className="Canvas" ref={canvasRef}>
+      <div
+        className="grid"
+        style={{
+          gridTemplateColumns: "30px ".repeat(cols),
+          gridTemplateRows: "30px ".repeat(rows),
+        }}
+      >
+        {graph.matrix.map((row) =>
+          row.map((node) => (
+            <Node
+              key={`node-${node.id}`}
+              node={node}
+              path={path}
+              isStartNode={node.id === startNodeId}
+              isEndNode={node.id === endNodeId}
+              onDragStart={onDragStart}
+              onDragEnter={onDragEnter}
+              onDragEnd={onDragEnd}
+            />
+          ))
+        )}
+      </div>
     </div>
   );
 };

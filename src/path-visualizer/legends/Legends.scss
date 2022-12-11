@@ -1,7 +1,7 @@
 @use "/src/variables.scss" as *;
 
 .Legends {
-  height: 8vh;
+  height: $legends-height;
   display: flex;
   justify-content: space-around;
 

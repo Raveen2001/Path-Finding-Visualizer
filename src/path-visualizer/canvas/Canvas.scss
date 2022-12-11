@@ -1,14 +1,17 @@
 @use "/src/variables.scss" as *;
 
 .Canvas {
-  margin: auto;
-  background-color: $background-color;
-  width: fit-content;
-  display: grid;
-  gap: $gap;
-  padding: $gap;
-  height: min-content;
-  overflow: hidden;
-  grid-template-columns: repeat($columns, 1fr);
-  grid-template-rows: repeat($rows, 1fr);
+  flex: 1;
+  width: 100vw;
+  display: flex;
+  .grid {
+    margin: auto;
+    width: min-content;
+    background-color: $background-color;
+    display: grid;
+    gap: $gap;
+    padding: $gap;
+
+    overflow: hidden;
+  }
 }

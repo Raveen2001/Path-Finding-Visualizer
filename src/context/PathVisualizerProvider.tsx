@@ -4,6 +4,8 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
+  useRef,
   useState,
 } from "react";
 import { CONSTANTS, ALGORITHMS } from "../constants";
@@ -13,6 +15,7 @@ import {
   IPathVisualizerOptionsContext,
   NodeModel,
 } from "../models";
+import useGrid from "../utils/useGrid";
 import { showToast } from "../utils/toast";
 
 const PathVisualizerOptionsContext =
@@ -33,17 +36,20 @@ interface IPathVisualizerProvider {
 const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
   children,
 }) => {
+  const canvasRef = useRef<HTMLDivElement>(null);
+  const [rows, cols] = useGrid(canvasRef);
+
   const [selectedAlgorithmIdx, setSelectedAlgorithmIdx] = useState<number>(-1);
-  const [startNodeId, setStartNodeId] = useState<number>(
-    _.random(0, CONSTANTS.totalNodes)
-  );
-  const [endNodeId, setEndNodeId] = useState<number>(
-    _.random(0, CONSTANTS.totalNodes)
-  );
-  const [graph, setGraph] = useState<GraphModel>(
-    new GraphModel(CONSTANTS.rows, CONSTANTS.cols)
-  );
+  const [startNodeId, setStartNodeId] = useState<number>(0);
+  const [endNodeId, setEndNodeId] = useState<number>(0);
+  const [graph, setGraph] = useState<GraphModel>(new GraphModel(0, 0));
   const [path, setPath] = useState<NodeModel[]>([]);
+
+  useEffect(() => {
+    setGraph(new GraphModel(rows, cols));
+    setStartNodeId(_.random(0, rows * cols));
+    setEndNodeId(_.random(0, rows * cols));
+  }, [rows, cols]);
 
   const startVisualization = useCallback(() => {
     if (selectedAlgorithmIdx < 0 || selectedAlgorithmIdx >= ALGORITHMS.length) {
@@ -85,6 +91,9 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
     >
       <PathVisualizerCanvasContext.Provider
         value={{
+          canvasRef,
+          rows,
+          cols,
           startNodeId,
           setStartNodeId,
           endNodeId,

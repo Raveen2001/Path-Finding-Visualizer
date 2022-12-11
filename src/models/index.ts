@@ -1,5 +1,6 @@
 export { GraphModel } from "./GraphModel";
 export { NodeModel } from "./NodeModel";
+import React from "react";
 import { GraphModel, NodeModel } from ".";
 
 export type TAlgorithm = {
@@ -21,6 +22,10 @@ export interface IPathVisualizerOptionsContext {
 }
 
 export interface IPathVisualizerCanvasContext {
+  canvasRef: React.RefObject<HTMLDivElement>;
+  rows: number;
+  cols: number;
+
   startNodeId: number;
   setStartNodeId: TSetState<number>;
 
