@@ -5,16 +5,16 @@ $background-color: #383a59;
 // canvas
 $columns: 45;
 $rows: 20;
-$gap: 0.05rem;
+$gap: 0.1rem;
 $canvas-background-color: #282a36;
 
 // node
 $node-end-color: #fb9595;
 $node-start-color: #50fa7b;
-$node-visited-color: #8be9fd;
 $node-path-color: #f1fa8c;
 $node-wall-color: #ffb86c;
-
+$node-visited-animation-start-color: #32f477;
+$node-visited-animation-end-color: #fb9595;
 // top-menu
 $top-menu-height: 4rem;
 $top-menu-color: #282a36;

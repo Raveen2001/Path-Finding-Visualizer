@@ -16,6 +16,7 @@ export const dijkstra = (
       const node = queue.shift() as NodeModel;
       if (node.id == endId) {
         let targetNode = node;
+        // targetNode.update(node);
         while (targetNode.previousNode != null) {
           path.push(targetNode);
           targetNode = targetNode.previousNode;

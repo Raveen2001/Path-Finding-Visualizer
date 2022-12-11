@@ -3,6 +3,7 @@ import cn from "classnames";
 import { NodeModel } from "../../models/NodeModel";
 import { ReactComponent as StartIcon } from "../../assets/svg/start.svg";
 import { ReactComponent as EndIcon } from "../../assets/svg/finish.svg";
+import { ReactComponent as PathIcon } from "../../assets/svg/path-node.svg";
 import "./Node.scss";
 
 interface INode {
@@ -33,41 +34,41 @@ const Node: React.FC<INode> = ({
   onDragEnd,
 }) => {
   const nodeRef = useRef<HTMLDivElement>(null);
-  const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
-
-  // useEffect(() => {
-  //   console.log(isFirstRender);
-  //   if (isFirstRender) return;
-  //   const isNodeVisited = Number.isFinite(node.distance);
-  //   if (isNodeVisited) {
-  //     nodeRef.current?.classList.add("visited");
-  //   } else {
-  //     nodeRef.current?.classList.remove("visited");
-  //   }
-  // }, [path.join(",")]);
 
   useEffect(() => {
-    if (node.id === 0) console.log("creating", isFirstRender);
+    // clear all animations
+    nodeRef.current?.classList.remove(
+      "path-node",
+      "spread-animation",
+      "path-animation"
+    );
+
     const isNodeVisited = Number.isFinite(node.distance);
-    nodeRef.current?.classList.remove("visited");
-    let timeoutId: number | undefined = undefined;
-    if (isNodeVisited) {
+    const timeoutIds: number[] = [];
+
+    if (isNodeVisited && !isStartNode && !isEndNode) {
       const time = node.animationLevel * 100;
-      timeoutId = setTimeout(() => {
-        nodeRef.current?.classList.add("visited");
-
-        setIsFirstRender(false);
-
-        console.log("first render completed");
+      let timeoutId = setTimeout(() => {
+        nodeRef.current?.classList.add("spread-animation");
       }, time);
-    } else {
-      setIsFirstRender(false);
+
+      timeoutIds.push(timeoutId);
+
+      if (path.includes(node)) {
+        const timeForSpreadAnimation =
+          path[path.length - 1].animationLevel * 100 + 1500;
+        const pathTime = timeForSpreadAnimation + node.animationLevel * 100;
+
+        let timeoutId = setTimeout(() => {
+          nodeRef.current?.classList.add("path-node", "path-animation");
+        }, pathTime);
+
+        timeoutIds.push(timeoutId);
+      }
     }
 
     return () => {
-      if (node.id === 0) console.log("destroying");
-      clearTimeout(timeoutId);
-      setIsFirstRender(true);
+      timeoutIds.map((id) => clearTimeout(id));
     };
   }, [path.join(",")]);
 
@@ -82,8 +83,6 @@ const Node: React.FC<INode> = ({
     >
       <div
         className={cn("bg", {
-          // visited: Number.isFinite(node.distance),
-          "path-node": path.includes(node),
           wall: node.isWall,
           end: isEndNode,
           start: isStartNode,
