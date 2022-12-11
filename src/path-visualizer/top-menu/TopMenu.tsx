@@ -32,12 +32,20 @@ const TopMenu = () => {
             colors: {
               ...theme.colors,
 
-              primary25: COLORS.bgDark,
+              primary25: COLORS.hoverColor,
+              primary50: COLORS.holdDownColor,
               primary: COLORS.textColor,
               neutral0: COLORS.bgLight,
+              neutral80: COLORS.darkWhite,
               neutral60: COLORS.white,
             },
           })}
+          styles={{
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+              width: 300,
+            }),
+          }}
         ></Select>
       </div>
       <button className="start-visualization-btn">Start Visualization</button>

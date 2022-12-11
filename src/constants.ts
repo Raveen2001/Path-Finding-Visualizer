@@ -12,6 +12,10 @@ export const ALGORITHMS: TAlgorithm[] = [
     name: "Dijkstra's Algorithm",
     fn: dijkstra,
   },
+  {
+    name: "A* Algorithm",
+    fn: dijkstra,
+  },
 ];
 
 export const COLORS = {
@@ -19,6 +23,9 @@ export const COLORS = {
   bgLight: "#383a59",
   textColor: "#ffb86c",
   white: "#AFB0B1",
+  darkWhite: "#f0f2f5",
+  hoverColor: "#262738",
+  holdDownColor: "#636587",
 };
 
 export default CONSTANTS;

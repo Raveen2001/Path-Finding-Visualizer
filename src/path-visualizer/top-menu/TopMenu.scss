@@ -4,22 +4,23 @@
   height: $top-menu-height;
   max-height: $top-menu-height;
   background-color: $top-menu-color;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   padding: 5px 10px;
 
   .logo {
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: start;
+    align-items: flex-start;
     gap: 5px;
     img {
-      margin: auto;
+      margin: auto 0;
     }
   }
 
   .menu {
-    flex: 1;
     display: flex;
     justify-content: center;
   }
@@ -29,6 +30,7 @@
     margin: 0;
     width: 10rem;
     height: 2rem;
+    margin-left: auto;
     background-color: red;
   }
 }
