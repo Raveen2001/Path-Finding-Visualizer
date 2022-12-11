@@ -1,5 +1,11 @@
 import _ from "lodash";
-import React, { createContext, useContext, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { CONSTANTS, ALGORITHMS } from "../constants";
 import {
   GraphModel,
@@ -27,6 +33,7 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
   children,
 }) => {
   const [selectedAlgorithmIdx, setSelectedAlgorithmIdx] = useState<number>(-1);
+
   const [startNodeId, setStartNodeId] = useState<number>(
     _.random(0, CONSTANTS.totalNodes)
   );
@@ -38,12 +45,22 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
   );
   const [path, setPath] = useState<NodeModel[]>([]);
 
+  const startVisualization = useCallback(() => {
+    if (selectedAlgorithmIdx < 0 || selectedAlgorithmIdx >= ALGORITHMS.length)
+      return;
+    const algorithm = ALGORITHMS[selectedAlgorithmIdx].fn;
+    let [updatedGraph, path] = algorithm(graph, startNodeId, endNodeId);
+    setGraph(updatedGraph);
+    setPath(path);
+  }, [selectedAlgorithmIdx, startNodeId, endNodeId, graph]);
+
   return (
     <PathVisualizerOptionsContext.Provider
       value={{
         algorithms: ALGORITHMS,
         selectedAlgorithmIdx,
         setSelectedAlgorithmIdx,
+        startVisualization,
       }}
     >
       <PathVisualizerCanvasContext.Provider

@@ -17,6 +17,7 @@ export interface IPathVisualizerOptionsContext {
   algorithms: TAlgorithm[];
   selectedAlgorithmIdx: number;
   setSelectedAlgorithmIdx: TSetState<number>;
+  startVisualization: () => void;
 }
 
 export interface IPathVisualizerCanvasContext {

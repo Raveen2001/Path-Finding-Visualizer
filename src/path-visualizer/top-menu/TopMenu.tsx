@@ -1,11 +1,11 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import Select from "react-select";
 import { COLORS } from "../../constants";
 import { usePathVisualizerOptionsContext } from "../../context/PathVisualizerProvider";
 import "./TopMenu.scss";
 
 const TopMenu = () => {
-  const { algorithms, selectedAlgorithmIdx, setSelectedAlgorithmIdx } =
+  const { algorithms, setSelectedAlgorithmIdx, startVisualization } =
     usePathVisualizerOptionsContext()!;
 
   const algorithmOptions = useMemo(
@@ -26,12 +26,15 @@ const TopMenu = () => {
       <div className="menu">
         <Select
           options={algorithmOptions}
+          onChange={(newValue) => {
+            console.log(newValue?.value ?? -1);
+            setSelectedAlgorithmIdx(newValue?.value ?? -1);
+          }}
           theme={(theme) => ({
             ...theme,
             borderRadius: 0,
             colors: {
               ...theme.colors,
-
               primary25: COLORS.hoverColor,
               primary50: COLORS.holdDownColor,
               primary: COLORS.textColor,
@@ -46,9 +49,12 @@ const TopMenu = () => {
               width: 300,
             }),
           }}
+          placeholder="Select an algorithm"
         ></Select>
       </div>
-      <button className="start-visualization-btn">Start Visualization</button>
+      <button className="start-visualization-btn" onClick={startVisualization}>
+        Start Visualization
+      </button>
     </div>
   );
 };

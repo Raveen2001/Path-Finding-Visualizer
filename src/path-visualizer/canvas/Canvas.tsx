@@ -3,7 +3,10 @@ import Node from "../node/Node";
 import _ from "lodash";
 import "./canvas.scss";
 import { dijkstra } from "../../algorithms/dijkstra";
-import { usePathVisualizerCanvasContext } from "../../context/PathVisualizerProvider";
+import {
+  usePathVisualizerCanvasContext,
+  usePathVisualizerOptionsContext,
+} from "../../context/PathVisualizerProvider";
 
 const Canvas = () => {
   const {
@@ -14,16 +17,15 @@ const Canvas = () => {
     graph,
     setGraph,
     path,
-    setPath,
   } = usePathVisualizerCanvasContext()!;
+
+  const { startVisualization } = usePathVisualizerOptionsContext()!;
 
   const currentDragHoverElement = useRef<number>();
   const drawWall = useRef(false);
 
   useEffect(() => {
-    let [updatedGraph, path] = dijkstra(graph, startNodeId, endNodeId);
-    setGraph(updatedGraph);
-    setPath(path);
+    startVisualization();
   }, [startNodeId, endNodeId]);
 
   const onDragStart = useCallback(
