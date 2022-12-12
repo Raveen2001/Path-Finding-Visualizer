@@ -1,11 +1,40 @@
 .dark {
-  --accent-color: #ffb86c;
-  --primary-color: #282a36;
-  --secondary-color: #383a59;
+  // --accent-color: #ffb86c;
+  // --primary-color: #282a36;
+  // --secondary-color: #383a59;
+  // --color: #f0f2f5;
+  // --icon-color: #000009;
+  // --hover-color: #262738;
+  // --hold-down-color: #636587;
+  // --canvas-background-color: var(--primary-color);
+
+  // // Theme Switcher
+  // --other-accent-color: #17242a;
+  // --other-primary-color: #def2f1;
+
+  // // node
+  // --node-end-color: #00b4ab;
+  // --node-start-color: #fb9595;
+  // --node-path-gradient: radial-gradient(
+  //   var(--node-start-color),
+  //   var(--node-end-color)
+  // );
+  // --node-wall-color: #ffb86c;
+  // --node-weight-color: red;
+  // --node-visited-animation-start-color: var(--node-start-color);
+  // --node-visited-animation-end-color: var(--node-end-color);
+
+  // // top-menu
+  // --top-menu-color: var(--primary-color);
+
+  --accent-color: #ffd9b0;
+  --primary-color: #0d1117;
+  --secondary-color: #161b22;
   --color: #f0f2f5;
+  --node-text-color: #282a36;
   --icon-color: #000009;
-  --hover-color: #262738;
-  --hold-down-color: #636587;
+  --hover-color: #262c34;
+  --hold-down-color: #1d242d;
   --canvas-background-color: var(--primary-color);
 
   // Theme Switcher
@@ -13,14 +42,14 @@
   --other-primary-color: #def2f1;
 
   // node
-  --node-end-color: #00b4ab;
-  --node-start-color: #fb9595;
+  --node-start-color: #e9ddc8;
+  --node-end-color: #a27b5c;
   --node-path-gradient: radial-gradient(
     var(--node-start-color),
     var(--node-end-color)
   );
-  --node-wall-color: #ffb86c;
-  --node-weight-color: red;
+  --node-wall-color: #f1efe0;
+  --node-weight-color: var(--node-wall-color);
   --node-visited-animation-start-color: var(--node-start-color);
   --node-visited-animation-end-color: var(--node-end-color);
 
@@ -33,16 +62,17 @@
   --accent-color: #17242a;
   --primary-color: #def2f1;
   --secondary-color: #ffffff;
-  --hover-color: #aed8d6;
+  --hover-color: #c6e5ec;
   --color: #282a36;
+  --node-text-color: #f0f2f5;
   --icon-color: #ffffff;
-  --hold-down-color: #badfe7;
+  --hold-down-color: #9abcc3;
 
   --canvas-background-color: var(--primary-color);
 
   // Theme Switcher
-  --other-accent-color: #ffb86c;
-  --other-primary-color: #282a36;
+  --other-accent-color: #ffd9b0;
+  --other-primary-color: #0d1117;
 
   // node
   --node-start-color: #00716c;
