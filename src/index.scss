@@ -1,14 +1,9 @@
-@use "./variables.scss" as *;
-
-:root {
+@use "/src/variables.scss";
+:root  {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: $color;
-  background-color: $background-color;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,4 +14,7 @@
 
 body {
   margin: 0;
+  color-scheme: light dark;
+  color: var(--color);
+  background-color: var(--background-color);
 }

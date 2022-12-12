@@ -1,0 +1,48 @@
+.dark {
+  --accent-color: #ffb86c;
+  --background-color: #383a59;
+  --canvas-background-color: #282a36;
+
+  // node
+  --node-end-color: #fb9595;
+  --node-start-color: #00b4ab;
+  --node-path-color: #f1fa8c;
+  --node-wall-color: #ffb86c;
+  --node-weight-color: red;
+  --node-visited-animation-start-color: #32f477;
+  --node-visited-animation-end-color: #fb9595;
+
+  // top-menu
+  --top-menu-color: #282a36;
+
+  // legends
+  --color: #f0f2f5;
+}
+
+.light {
+  --accent-color: #17242a;
+  --background-color: #ffffff;
+  --canvas-background-color: #def2f1;
+
+  // node
+  --node-start-color: #00716c;
+  --node-end-color: #0f4368;
+  --node-path-gradient: radial-gradient(
+    var(--node-start-color),
+    var(--node-end-color)
+  );
+  --node-wall-color: #2c2b3b;
+  --node-weight-color: #2c2b3b;
+  --node-visited-animation-start-color: var(--node-start-color);
+  --node-visited-animation-end-color: var(--node-end-color);
+
+  --hold-down-color: #badfe7;
+
+  // top-menu
+  --top-menu-color: #def2f1;
+
+  // legends
+  --color: #282a36;
+  --light-color: #edf5e0;
+  --icon-color: #ffffff;
+}

@@ -95,8 +95,8 @@ const Node: React.FC<INode> = ({
         id={`node-${node.id}`}
         ref={nodeRef}
       >
-        {isStartNode && <StartIcon fill="#282a36" />}
-        {isEndNode && <EndIcon fill="#282a36" />}
+        {isStartNode && <StartIcon fill="var(--icon-color)" />}
+        {isEndNode && <EndIcon fill="var(--icon-color)" />}
         {node.weight > 1 && <span>{node.weight}</span>}
       </div>
     </div>

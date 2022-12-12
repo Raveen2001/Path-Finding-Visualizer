@@ -1,4 +1,5 @@
-import React from "react";
+import _ from "lodash";
+import React, { useEffect } from "react";
 import Canvas from "./canvas/Canvas";
 import Legends from "./legends/Legends";
 import "./PathVisualizer.scss";

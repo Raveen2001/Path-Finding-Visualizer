@@ -1,16 +1,17 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Select from "react-select";
 import { COLORS } from "../../constants";
 import { usePathVisualizerOptionsContext } from "../../context/PathVisualizerProvider";
+import Toggle from "react-toggle";
+import "react-toggle/style.css";
 import "./TopMenu.scss";
+import "../../theme.scss";
 
 const TopMenu = () => {
-  const {
-    algorithms,
-    selectedAlgorithmIdx,
-    setSelectedAlgorithmIdx,
-    startVisualization,
-  } = usePathVisualizerOptionsContext()!;
+  const { algorithms, setSelectedAlgorithmIdx, startVisualization } =
+    usePathVisualizerOptionsContext()!;
+
+  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(true);
 
   const algorithmOptions = useMemo(
     () =>
@@ -21,8 +22,16 @@ const TopMenu = () => {
     [algorithms]
   );
 
+  // change theme
+  useEffect(() => {
+    document.body.classList.remove("dark", "light");
+
+    if (isDarkTheme) document.body.classList.add("dark");
+    else document.body.classList.add("light");
+  }, [isDarkTheme]);
+
   return (
-    <div className="Top-Menu">
+    <div className={"Top-Menu"}>
       <div className="logo">
         <img src="./visual-thinking.png" width={"30px"} height={"30px"} />
         <h2>Path Finding Visualizer</h2>
@@ -55,6 +64,22 @@ const TopMenu = () => {
           placeholder="Select an algorithm"
         ></Select>
       </div>
+
+      <div style={{ width: "min-content" }}>
+        <label htmlFor="">
+          <Toggle
+            defaultChecked={isDarkTheme}
+            icons={{
+              checked: null,
+              unchecked: null,
+            }}
+            onChange={() => {
+              setIsDarkTheme(!isDarkTheme);
+            }}
+          />
+        </label>
+      </div>
+
       <button className="start-visualization-btn" onClick={startVisualization}>
         Start Visualization
       </button>

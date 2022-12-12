@@ -1,5 +1,3 @@
-@use "/src/variables.scss" as *;
-
 @keyframes spread-effect {
   0% {
     border-radius: 100%;
@@ -7,23 +5,23 @@
     opacity: 0;
   }
 
-  30% {
+  40% {
     border-radius: 50%;
     transform: scale(0.6);
-    background-color: $node-visited-animation-start-color;
+    background-color: var(--node-visited-animation-start-color);
     opacity: 1;
   }
 
-  60% {
+  50% {
     border-radius: 10%;
     transform: scale(1.1);
-    background-color: $node-visited-animation-end-color;
+    background-color: var(--node-visited-animation-end-color);
   }
 
   100% {
     border-radius: 100%;
     transform: scale(0);
-    background-color: $canvas-background-color;
+    background-color: var(--canvas-background-color);
   }
 }
 
@@ -42,7 +40,7 @@
 .Node {
   width: 30px;
   height: 30px;
-  background-color: $canvas-background-color;
+  background-color: var(--canvas-background-color);
 
   .bg {
     width: 100%;
@@ -52,7 +50,7 @@
     justify-content: center;
 
     span {
-      color: $canvas-background-color;
+      color: var(--canvas-background-color);
     }
   }
 
@@ -65,22 +63,23 @@
   }
 
   .start {
-    background-color: $node-start-color !important;
+    background-color: var(--node-start-color) !important;
   }
 
   .path-node {
-    background-color: $node-path-color !important;
+    // background-color: var(--node-path-color) !important;
+    background-image: var(--node-path-gradient);
   }
 
   .end {
-    background-color: $node-end-color !important;
+    background-color: var(--node-end-color) !important;
   }
 
   .wall {
-    background-color: $node-wall-color !important;
+    background-color: var(--node-wall-color) !important;
   }
 
   .weighted {
-    background-color: $node-weight-color !important;
+    background-color: var(--node-weight-color) !important;
   }
 }

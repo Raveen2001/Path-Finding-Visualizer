@@ -34,19 +34,22 @@ const Canvas = () => {
     []
   );
 
-  const onDragEnter = useCallback((e: React.DragEvent, idx: number) => {
-    if (drawWall.current) {
-      let updatedGraph;
-      if (e.shiftKey) {
-        updatedGraph = graph.addWeightToWall(idx);
+  const onDragEnter = useCallback(
+    (e: React.DragEvent, idx: number) => {
+      if (drawWall.current) {
+        let updatedGraph;
+        if (e.shiftKey) {
+          updatedGraph = graph.addWeightToWall(idx);
+        } else {
+          updatedGraph = graph.changeNodeToWall(idx);
+        }
+        if (updatedGraph) setGraph(updatedGraph);
       } else {
-        updatedGraph = graph.changeNodeToWall(idx);
+        currentDragHoverElement.current = idx;
       }
-      if (updatedGraph) setGraph(updatedGraph);
-    } else {
-      currentDragHoverElement.current = idx;
-    }
-  }, []);
+    },
+    [graph]
+  );
 
   const onDragEnd = useCallback(
     (
@@ -54,6 +57,7 @@ const Canvas = () => {
       isStartNodeChanged?: boolean,
       isEndNodeChanged?: boolean
     ) => {
+      // e.preventDefault();
       if (drawWall.current) return;
 
       const updatedId = currentDragHoverElement.current;
@@ -76,7 +80,7 @@ const Canvas = () => {
 
       currentDragHoverElement.current = undefined;
     },
-    []
+    [graph]
   );
 
   return (
