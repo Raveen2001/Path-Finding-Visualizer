@@ -1,28 +1,46 @@
 .dark {
   --accent-color: #ffb86c;
-  --background-color: #383a59;
-  --canvas-background-color: #282a36;
+  --primary-color: #282a36;
+  --secondary-color: #383a59;
+  --color: #f0f2f5;
+  --icon-color: #000009;
+  --hover-color: #262738;
+  --hold-down-color: #636587;
+  --canvas-background-color: var(--primary-color);
+
+  // Theme Switcher
+  --other-accent-color: #17242a;
+  --other-primary-color: #def2f1;
 
   // node
-  --node-end-color: #fb9595;
-  --node-start-color: #00b4ab;
-  --node-path-color: #f1fa8c;
+  --node-end-color: #00b4ab;
+  --node-start-color: #fb9595;
+  --node-path-gradient: radial-gradient(
+    var(--node-start-color),
+    var(--node-end-color)
+  );
   --node-wall-color: #ffb86c;
   --node-weight-color: red;
-  --node-visited-animation-start-color: #32f477;
-  --node-visited-animation-end-color: #fb9595;
+  --node-visited-animation-start-color: var(--node-start-color);
+  --node-visited-animation-end-color: var(--node-end-color);
 
   // top-menu
-  --top-menu-color: #282a36;
-
-  // legends
-  --color: #f0f2f5;
+  --top-menu-color: var(--primary-color);
 }
 
 .light {
+  // Theme
   --accent-color: #17242a;
-  --background-color: #ffffff;
-  --canvas-background-color: #def2f1;
+  --primary-color: #def2f1;
+  --secondary-color: #ffffff;
+  --color: #282a36;
+  --icon-color: #ffffff;
+
+  --canvas-background-color: var(--primary-color);
+
+  // Theme Switcher
+  --other-accent-color: #ffb86c;
+  --other-primary-color: #282a36;
 
   // node
   --node-start-color: #00716c;
@@ -31,18 +49,13 @@
     var(--node-start-color),
     var(--node-end-color)
   );
-  --node-wall-color: #2c2b3b;
-  --node-weight-color: #2c2b3b;
+  --node-wall-color: #1e1e62;
+  --node-weight-color: var(--node-wall-color);
   --node-visited-animation-start-color: var(--node-start-color);
   --node-visited-animation-end-color: var(--node-end-color);
 
   --hold-down-color: #badfe7;
 
   // top-menu
-  --top-menu-color: #def2f1;
-
-  // legends
-  --color: #282a36;
-  --light-color: #edf5e0;
-  --icon-color: #ffffff;
+  --top-menu-color: var(--primary-color);
 }

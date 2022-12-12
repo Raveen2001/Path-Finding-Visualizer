@@ -37,12 +37,12 @@
     color: var(--accent-color);
     font-size: 1rem;
     padding: 14px 32px;
-    transition-duration: 0.4s;
+    transition-duration: 0.5s;
     cursor: pointer;
   }
 
   .start-visualization-btn:hover {
-    color: var(--light-color);
+    color: var(--primary-color);
     background-color: var(--accent-color);
   }
 }

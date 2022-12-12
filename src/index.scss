@@ -1,5 +1,5 @@
 @use "/src/variables.scss";
-:root  {
+:root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -14,7 +14,6 @@
 
 body {
   margin: 0;
-  color-scheme: light dark;
   color: var(--color);
-  background-color: var(--background-color);
+  background-color: var(--secondary-color);
 }
