@@ -42,8 +42,6 @@ const Node: React.FC<INode> = ({
       "path-animation"
     );
 
-    if (node.weight > 1) nodeRef.current?.classList.add("weighted");
-
     const isNodeVisited = Number.isFinite(node.distance);
     const isWeightedNode = node.weight > 1;
     const timeoutIds: number[] = [];
@@ -64,7 +62,6 @@ const Node: React.FC<INode> = ({
         const pathTime = timeForSpreadAnimation + node.animationLevel * 100;
 
         let timeoutId = setTimeout(() => {
-          nodeRef.current?.classList.remove("weighted");
           nodeRef.current?.classList.add("path-node", "path-animation");
         }, pathTime);
 
