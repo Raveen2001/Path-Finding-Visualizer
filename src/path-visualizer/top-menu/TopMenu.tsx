@@ -49,6 +49,7 @@ const TopMenu = () => {
             control: (baseStyles, state) => ({
               ...baseStyles,
               width: 300,
+              transition: "all 0.2s ease",
             }),
           }}
           placeholder="Select an algorithm"

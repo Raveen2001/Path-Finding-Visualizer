@@ -33,8 +33,10 @@
   --accent-color: #17242a;
   --primary-color: #def2f1;
   --secondary-color: #ffffff;
+  --hover-color: #aed8d6;
   --color: #282a36;
   --icon-color: #ffffff;
+  --hold-down-color: #badfe7;
 
   --canvas-background-color: var(--primary-color);
 
@@ -53,8 +55,6 @@
   --node-weight-color: var(--node-wall-color);
   --node-visited-animation-start-color: var(--node-start-color);
   --node-visited-animation-end-color: var(--node-end-color);
-
-  --hold-down-color: #badfe7;
 
   // top-menu
   --top-menu-color: var(--primary-color);
