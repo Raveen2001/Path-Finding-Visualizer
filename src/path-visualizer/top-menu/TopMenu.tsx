@@ -10,10 +10,16 @@ import ActionButton from "./action-button/ActionButton";
 import { ReactComponent as PlayIcon } from "../../assets/svg/play.svg";
 import { ReactComponent as ProfileIcon } from "../../assets/svg/profile.svg";
 import { ReactComponent as InfoIcon } from "../../assets/svg/info.svg";
+import { ReactComponent as RefreshIcon } from "../../assets/svg/refresh.svg";
 
 const TopMenu = () => {
-  const { algorithms, setSelectedAlgorithmIdx, startVisualization, startTour } =
-    usePathVisualizerOptionsContext()!;
+  const {
+    algorithms,
+    setSelectedAlgorithmIdx,
+    startVisualization,
+    startTour,
+    resetCanvas,
+  } = usePathVisualizerOptionsContext()!;
 
   const algorithmOptions = useMemo(
     () =>
@@ -74,6 +80,12 @@ const TopMenu = () => {
           onClick={() => {}}
           icon={<ProfileIcon />}
           label={"Profile"}
+        />
+        <ActionButton
+          id="reset"
+          onClick={resetCanvas}
+          icon={<RefreshIcon />}
+          label={"Reset"}
         />
         <ActionButton
           id="play"

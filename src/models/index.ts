@@ -25,6 +25,7 @@ export interface IPathVisualizerOptionsContext {
   handleTourCallback: (data: CallBackProps) => void;
   startTour: (e: React.MouseEvent<HTMLElement>) => void;
   startVisualization: () => void;
+  resetCanvas: () => void;
 }
 
 export interface IPathVisualizerCanvasContext {

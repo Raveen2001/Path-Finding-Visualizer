@@ -40,13 +40,15 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
   const canvasRef = useRef<HTMLDivElement>(null);
   const [rows, cols] = useGrid(canvasRef);
 
-  const [selectedAlgorithmIdx, setSelectedAlgorithmIdx] = useState<number>(-1);
+  const [selectedAlgorithmIdx, setSelectedAlgorithmIdx] = useState<number>(0);
   const [startNodeId, setStartNodeId] = useState<number>(0);
   const [endNodeId, setEndNodeId] = useState<number>(0);
   const [graph, setGraph] = useState<GraphModel>(new GraphModel(0, 0));
   const [path, setPath] = useState<NodeModel[]>([]);
 
   const [showTour, setShowTour] = useLocalStorage<boolean>("showTour", true);
+
+  const hasVisualizedOnce = useRef<boolean>(false);
 
   useEffect(() => {
     setGraph(new GraphModel(rows, cols));
@@ -68,20 +70,35 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
     setGraph(updatedGraph);
     setPath(path);
 
-    if (path.length === 0)
+    if (path.length === 0) {
       setTimeout(
         () => showToast("No path found"),
         maxAnimationLevel * 100 + 1000
       );
+    }
+
+    hasVisualizedOnce.current = true;
   }, [selectedAlgorithmIdx, startNodeId, endNodeId, graph]);
 
+  const resetCanvas = useCallback(() => {
+    setGraph(new GraphModel(rows, cols));
+    setPath([]);
+    setStartNodeId(_.random(0, rows * cols));
+    setEndNodeId(_.random(0, rows * cols));
+    hasVisualizedOnce.current = false;
+  }, [rows, cols]);
+
   const updateVisualization = useCallback(() => {
-    if (selectedAlgorithmIdx < 0 || selectedAlgorithmIdx >= ALGORITHMS.length) {
+    if (
+      !hasVisualizedOnce.current ||
+      selectedAlgorithmIdx < 0 ||
+      selectedAlgorithmIdx >= ALGORITHMS.length
+    ) {
       return;
     }
 
     startVisualization();
-  }, [selectedAlgorithmIdx, startVisualization]);
+  }, [selectedAlgorithmIdx, startVisualization, hasVisualizedOnce]);
 
   const handleTourCallback = (data: CallBackProps) => {
     const { status } = data;
@@ -94,7 +111,6 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
 
   const startTour = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-
     setShowTour(true);
   };
   return (
@@ -108,6 +124,7 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
         startTour,
         handleTourCallback,
         startVisualization,
+        resetCanvas,
       }}
     >
       <PathVisualizerCanvasContext.Provider
