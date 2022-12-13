@@ -15,6 +15,7 @@ import { ReactComponent as RefreshIcon } from "../../assets/svg/refresh.svg";
 const TopMenu = () => {
   const {
     algorithms,
+    selectedAlgorithmIdx,
     setSelectedAlgorithmIdx,
     startVisualization,
     startTour,
@@ -40,6 +41,7 @@ const TopMenu = () => {
         <Select
           id="algorithms"
           options={algorithmOptions}
+          defaultValue={algorithmOptions[0]}
           onChange={(newValue) => {
             setSelectedAlgorithmIdx(newValue?.value ?? -1);
           }}

@@ -9,7 +9,7 @@ export const ALGORITHMS: TAlgorithm[] = [
   },
 
   {
-    name: "Dijkstra's Algorithm",
+    name: "A* Algorithm",
     fn: dijkstra,
   },
   {
