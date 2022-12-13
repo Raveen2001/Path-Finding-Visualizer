@@ -15,7 +15,9 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-self: center;
+    justify-self: center;
     row-gap: 10px;
     overflow-y: scroll;
+    margin-bottom: 10px;
   }
 }
