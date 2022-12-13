@@ -81,6 +81,7 @@
 
   .wall {
     background-color: var(--node-wall-color) !important;
+    transition-duration: 200ms;
   }
 
   .weighted {

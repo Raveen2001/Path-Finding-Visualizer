@@ -60,11 +60,11 @@ const Node: React.FC<INode> = ({
       if (isWeightedNode) {
         timeoutId = setTimeout(() => {
           nodeRef.current?.classList.add("weighted-animation");
-        }, time);
+        }, time + 1000);
 
         let timeoutId2 = setTimeout(() => {
           nodeRef.current?.classList.remove("weighted-animation");
-        }, time + 200);
+        }, time + 1200);
 
         timeoutIds.push(timeoutId2);
       } else {
