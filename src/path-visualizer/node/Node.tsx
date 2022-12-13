@@ -55,14 +55,24 @@ const Node: React.FC<INode> = ({
     const timeoutIds: number[] = [];
 
     if (isNodeVisited && !isStartNode && !isEndNode) {
-      if (!isWeightedNode) {
-        const time = node.animationLevel * 100;
-        let timeoutId = setTimeout(() => {
-          nodeRef.current?.classList.add("spread-animation");
+      const time = node.animationLevel * 100;
+      let timeoutId;
+      if (isWeightedNode) {
+        timeoutId = setTimeout(() => {
+          nodeRef.current?.classList.add("weighted-animation");
         }, time);
 
-        timeoutIds.push(timeoutId);
+        let timeoutId2 = setTimeout(() => {
+          nodeRef.current?.classList.remove("weighted-animation");
+        }, time + 200);
+
+        timeoutIds.push(timeoutId2);
+      } else {
+        timeoutId = setTimeout(() => {
+          nodeRef.current?.classList.add("spread-animation");
+        }, time);
       }
+      timeoutIds.push(timeoutId);
 
       if (path.includes(node)) {
         const timeForSpreadAnimation =

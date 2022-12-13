@@ -63,6 +63,10 @@
     animation: path 1s;
   }
 
+  .weighted-animation {
+    transform: scale(0.5);
+  }
+
   .start {
     background-color: var(--node-start-color) !important;
   }
@@ -81,5 +85,6 @@
 
   .weighted {
     background-color: var(--node-weight-color) !important;
+    transition-duration: 200ms;
   }
 }
