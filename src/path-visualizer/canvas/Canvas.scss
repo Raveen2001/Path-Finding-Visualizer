@@ -3,6 +3,7 @@
   flex: 1;
   width: 100vw;
   display: flex;
+  touch-action: none;
   .grid {
     margin: auto;
     width: min-content;
