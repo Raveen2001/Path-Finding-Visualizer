@@ -14,7 +14,12 @@ interface INode {
     isStartNode?: boolean,
     isEndNode?: boolean
   ) => void;
-  onDragEnter?: (e: React.DragEvent, idx: number) => void;
+  onDragEnter?: (
+    e: React.DragEvent,
+    idx: number,
+    isStartNode?: boolean,
+    isEndNode?: boolean
+  ) => void;
   onDragEnd?: (
     e: React.DragEvent,
     isStartNodeChanged?: boolean,
@@ -82,7 +87,9 @@ const Node: React.FC<INode> = ({
       className="Node"
       onDragStart={(e) => onDragStart?.(e, isStartNode, isEndNode)}
       onDragOver={(e) => e.preventDefault()}
-      onDragEnterCapture={(e) => onDragEnter?.(e, node.id)}
+      onDragEnterCapture={(e) =>
+        onDragEnter?.(e, node.id, isStartNode, isEndNode)
+      }
       onDragEnd={(e) => onDragEnd?.(e, isStartNode, isEndNode)}
       draggable
       {...props}

@@ -36,8 +36,13 @@ const Canvas = () => {
   );
 
   const onDragEnter = useCallback(
-    (e: React.DragEvent, idx: number) => {
-      if (drawWall.current) {
+    (
+      e: React.DragEvent,
+      idx: number,
+      isStartNode?: boolean,
+      isEndNode?: boolean
+    ) => {
+      if (drawWall.current && !isStartNode && !isEndNode) {
         let updatedGraph;
         if (e.shiftKey) {
           updatedGraph = graph.addWeightToWall(idx);
