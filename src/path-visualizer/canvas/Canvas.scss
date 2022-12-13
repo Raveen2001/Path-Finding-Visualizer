@@ -8,8 +8,8 @@
     width: min-content;
     background-color: var(--secondary-color);
     display: grid;
-    gap: $gap;
-    padding: $gap;
+    gap: $grid-gap;
+    padding: $grid-gap;
 
     overflow: hidden;
   }

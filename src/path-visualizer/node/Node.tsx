@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import cn from "classnames";
 import { NodeModel } from "../../models/NodeModel";
 import { ReactComponent as StartIcon } from "../../assets/svg/start.svg";
-import { ReactComponent as EndIcon } from "../../assets/svg/finish.svg";
+import { ReactComponent as EndIcon } from "../../assets/svg/end.svg";
 import "./Node.scss";
+import Beacon from "./beacon/Beacon";
 
 interface INode {
   node: NodeModel;
@@ -90,14 +91,14 @@ const Node: React.FC<INode> = ({
         className={cn("bg", {
           wall: node.isWall,
           weighted: node.weight > 1,
-          end: isEndNode,
-          start: isStartNode,
+          // end: isEndNode,
+          // start: isStartNode,
         })}
         id={`node-${node.id}`}
         ref={nodeRef}
       >
-        {isStartNode && <StartIcon />}
-        {isEndNode && <EndIcon />}
+        {isStartNode && <Beacon color="var(--node-start-color)" />}
+        {isEndNode && <Beacon color="var(--node-end-color)" />}
         {node.weight > 1 && <span>{node.weight}</span>}
       </div>
     </div>

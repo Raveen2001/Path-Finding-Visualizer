@@ -1,15 +1,13 @@
-@use "/src/variables.scss";
+@use "/src/variables.scss" as *;
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  --top-menu-height: 8vh;
+  --legends-section-height: 8vh;
 }
 
 body {
@@ -17,4 +15,11 @@ body {
   color: var(--color);
   overflow: hidden;
   background-color: var(--secondary-color);
+}
+
+@media (max-width: $layout-breakpoint) {
+  :root {
+    --top-menu-height: 18vh;
+    --legends-section-height: 10vh;
+  }
 }

@@ -8,9 +8,11 @@ const useGrid = (ref: React.RefObject<HTMLDivElement>) => {
       const width = ref.current?.clientWidth ?? 0;
       const height = ref.current?.clientHeight ?? 0;
 
+      const colOffset = width > 960 ? 4 : 2;
+
       if (width >= 0 && height >= 0) {
         const rows = _.floor(height / 30) - 2;
-        const cols = _.floor(width / 30) - 4;
+        const cols = _.floor(width / 30) - colOffset;
         setGrid([rows, cols]);
         return;
       }
