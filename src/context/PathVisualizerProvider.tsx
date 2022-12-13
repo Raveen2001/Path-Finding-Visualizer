@@ -17,6 +17,7 @@ import {
 import useGrid from "../utils/useGrid";
 import { showToast } from "../utils/toast";
 import { CallBackProps, STATUS } from "react-joyride";
+import useLocalStorage from "../utils/useLocalStorage";
 
 const PathVisualizerOptionsContext =
   createContext<IPathVisualizerOptionsContext | null>(null);
@@ -45,7 +46,7 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
   const [graph, setGraph] = useState<GraphModel>(new GraphModel(0, 0));
   const [path, setPath] = useState<NodeModel[]>([]);
 
-  const [showTour, setShowTour] = useState(true);
+  const [showTour, setShowTour] = useLocalStorage<boolean>("showTour", true);
 
   useEffect(() => {
     setGraph(new GraphModel(rows, cols));

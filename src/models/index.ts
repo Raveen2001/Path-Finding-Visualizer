@@ -4,6 +4,7 @@ import React from "react";
 import { CallBackProps } from "react-joyride";
 import { GraphModel, NodeModel } from ".";
 
+export type Theme = "light" | "dark";
 export type TAlgorithm = {
   name: string;
   fn: (

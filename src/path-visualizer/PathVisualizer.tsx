@@ -1,5 +1,4 @@
 import _ from "lodash";
-import React, { useEffect } from "react";
 import ReactJoyride from "react-joyride";
 import { TOUR_STEPS, TOUR_THEME } from "../constants";
 import { usePathVisualizerOptionsContext } from "../context/PathVisualizerProvider";
