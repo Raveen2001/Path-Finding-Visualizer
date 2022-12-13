@@ -12,7 +12,6 @@ const ActionButton: React.FC<IActionButton> = ({
   label,
   ...props
 }) => {
-  console.log(label);
   return (
     <div className="Action-Button" onClick={onClick} {...props}>
       {icon}
