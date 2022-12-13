@@ -6,12 +6,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 3px solid var(--other-primary-color);
+  border: 3px solid var(--secondary-color);
   background-color: var(--other-accent-color);
   transition: all 0.5s ease;
   cursor: pointer;
 
   &:hover {
     box-shadow: 0 0 5px 1px var(--other-primary-color);
+  }
+
+  svg {
+    fill: var(--other-primary-color) !important;
   }
 }

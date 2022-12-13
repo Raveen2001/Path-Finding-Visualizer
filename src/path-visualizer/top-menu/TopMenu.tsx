@@ -1,14 +1,18 @@
 import React, { useMemo } from "react";
 import Select from "react-select";
 import { usePathVisualizerOptionsContext } from "../../context/PathVisualizerProvider";
-import "react-toggle/style.css";
 import "./TopMenu.scss";
 import "../../theme.scss";
 
 import ThemeSwitcher from "../theme-switcher/ThemeSwitcher";
+import ActionButton from "./action-button/ActionButton";
+
+import { ReactComponent as PlayIcon } from "../../assets/svg/play.svg";
+import { ReactComponent as ProfileIcon } from "../../assets/svg/profile.svg";
+import { ReactComponent as InfoIcon } from "../../assets/svg/info.svg";
 
 const TopMenu = () => {
-  const { algorithms, setSelectedAlgorithmIdx, startVisualization } =
+  const { algorithms, setSelectedAlgorithmIdx, startVisualization, startTour } =
     usePathVisualizerOptionsContext()!;
 
   const algorithmOptions = useMemo(
@@ -28,6 +32,7 @@ const TopMenu = () => {
       </div>
       <div className="menu">
         <Select
+          id="algorithms"
           options={algorithmOptions}
           onChange={(newValue) => {
             setSelectedAlgorithmIdx(newValue?.value ?? -1);
@@ -42,7 +47,6 @@ const TopMenu = () => {
               primary: "var(--accent-color)",
               neutral0: "var(--secondary-color)",
               neutral80: "var(--color)",
-              neutral60: "var(--color)",
             },
           })}
           styles={{
@@ -56,11 +60,29 @@ const TopMenu = () => {
         ></Select>
       </div>
 
-      <ThemeSwitcher />
-
-      <button className="start-visualization-btn" onClick={startVisualization}>
-        Start Visualization
-      </button>
+      <div className="actions">
+        <ActionButton
+          id="help"
+          onClick={(e) => {
+            startTour(e);
+          }}
+          icon={<InfoIcon />}
+          label={"Help"}
+        />
+        <ActionButton
+          id="profile"
+          onClick={() => {}}
+          icon={<ProfileIcon />}
+          label={"Profile"}
+        />
+        <ActionButton
+          id="play"
+          onClick={startVisualization}
+          icon={<PlayIcon />}
+          label={"Play"}
+        />
+        <ThemeSwitcher id="theme" />
+      </div>
     </div>
   );
 };

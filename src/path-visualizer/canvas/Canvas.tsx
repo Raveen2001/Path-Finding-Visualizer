@@ -3,6 +3,7 @@ import Node from "../node/Node";
 import _ from "lodash";
 import "./canvas.scss";
 import { usePathVisualizerCanvasContext } from "../../context/PathVisualizerProvider";
+import cn from "classnames";
 
 const Canvas = () => {
   const {
@@ -84,7 +85,7 @@ const Canvas = () => {
   );
 
   return (
-    <div className="Canvas" ref={canvasRef}>
+    <div className="Canvas" ref={canvasRef} id="canvas">
       <div
         className="grid"
         style={{
@@ -96,6 +97,10 @@ const Canvas = () => {
           row.map((node) => (
             <Node
               key={`node-${node.id}`}
+              id={cn({
+                startNode: node.id === startNodeId,
+                endNode: node.id === endNodeId,
+              })}
               node={node}
               path={path}
               isStartNode={node.id === startNodeId}

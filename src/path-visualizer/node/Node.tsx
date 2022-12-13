@@ -21,6 +21,7 @@ interface INode {
   ) => void;
   isStartNode?: boolean;
   isEndNode?: boolean;
+  [key: string]: any;
 }
 
 const Node: React.FC<INode> = ({
@@ -31,6 +32,7 @@ const Node: React.FC<INode> = ({
   onDragStart,
   onDragEnter,
   onDragEnd,
+  ...props
 }) => {
   const nodeRef = useRef<HTMLDivElement>(null);
 
@@ -82,6 +84,7 @@ const Node: React.FC<INode> = ({
       onDragEnterCapture={(e) => onDragEnter?.(e, node.id)}
       onDragEnd={(e) => onDragEnd?.(e, isStartNode, isEndNode)}
       draggable
+      {...props}
     >
       <div
         className={cn("bg", {
@@ -93,8 +96,8 @@ const Node: React.FC<INode> = ({
         id={`node-${node.id}`}
         ref={nodeRef}
       >
-        {isStartNode && <StartIcon fill="var(--icon-color)" />}
-        {isEndNode && <EndIcon fill="var(--icon-color)" />}
+        {isStartNode && <StartIcon />}
+        {isEndNode && <EndIcon />}
         {node.weight > 1 && <span>{node.weight}</span>}
       </div>
     </div>

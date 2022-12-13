@@ -16,6 +16,7 @@ import {
 } from "../models";
 import useGrid from "../utils/useGrid";
 import { showToast } from "../utils/toast";
+import { CallBackProps, STATUS } from "react-joyride";
 
 const PathVisualizerOptionsContext =
   createContext<IPathVisualizerOptionsContext | null>(null);
@@ -43,6 +44,8 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
   const [endNodeId, setEndNodeId] = useState<number>(0);
   const [graph, setGraph] = useState<GraphModel>(new GraphModel(0, 0));
   const [path, setPath] = useState<NodeModel[]>([]);
+
+  const [showTour, setShowTour] = useState(true);
 
   useEffect(() => {
     setGraph(new GraphModel(rows, cols));
@@ -79,12 +82,30 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
     startVisualization();
   }, [selectedAlgorithmIdx, startVisualization]);
 
+  const handleTourCallback = (data: CallBackProps) => {
+    const { status } = data;
+    const finishedStatuses: string[] = [STATUS.FINISHED, STATUS.SKIPPED];
+
+    if (finishedStatuses.includes(status)) {
+      setShowTour(false);
+    }
+  };
+
+  const startTour = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+
+    setShowTour(true);
+  };
   return (
     <PathVisualizerOptionsContext.Provider
       value={{
         algorithms: ALGORITHMS,
         selectedAlgorithmIdx,
         setSelectedAlgorithmIdx,
+        showTour,
+        setShowTour,
+        startTour,
+        handleTourCallback,
         startVisualization,
       }}
     >

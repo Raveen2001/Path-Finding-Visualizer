@@ -5,9 +5,9 @@
   max-height: $top-menu-height;
   background-color: var(--top-menu-color);
   display: grid;
-  grid-template-columns: 1fr 1fr 20px 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-  padding: 5px 10px;
+  padding: 5px 25px;
 
   .logo {
     height: 100%;
@@ -27,6 +27,16 @@
   .menu {
     display: flex;
     justify-content: center;
+
+    svg {
+      fill: var(--color);
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
   }
 
   .start-visualization-btn {
