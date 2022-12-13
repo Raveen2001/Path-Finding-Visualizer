@@ -24,23 +24,27 @@ export const TOUR_STEPS: Step[] = [
     title: "Select a algorithm",
     content: "Select a path finding algorithm for visualizing the algorithm.",
     disableBeacon: true,
+    placement: "auto",
   },
 
   {
     target: "#help",
     title: "Start tour",
     content: "Click to trigger the tour again",
+    placement: "auto",
   },
   {
     target: "#profile",
     title: "Portfolio",
     content: "Click to go to my portfolio website",
+    placement: "auto",
   },
 
   {
     target: "#theme",
     title: "Switch theme",
     content: "Click to switch the theme",
+    placement: "auto",
   },
 
   {
@@ -78,9 +82,16 @@ export const TOUR_STEPS: Step[] = [
     placement: "auto",
   },
   {
+    title: "Reset Canvas",
+    target: "#reset",
+    content: "Click this to reset the canvas",
+    placement: "auto",
+  },
+  {
     title: "Start Visualization",
     target: "#play",
     content: "Click to start the visualization process",
+    placement: "auto",
   },
 ];
 
