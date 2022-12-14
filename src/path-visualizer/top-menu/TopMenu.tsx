@@ -4,7 +4,7 @@ import { usePathVisualizerOptionsContext } from "../../context/PathVisualizerPro
 import "./TopMenu.scss";
 import "../../theme.scss";
 
-import ThemeSwitcher from "../theme-switcher/ThemeSwitcher";
+import ThemeSwitcher from "./theme-switcher/ThemeSwitcher";
 import ActionButton from "./action-button/ActionButton";
 
 import { ReactComponent as PlayIcon } from "../../assets/svg/play.svg";

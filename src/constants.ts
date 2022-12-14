@@ -12,10 +12,6 @@ export const ALGORITHMS: TAlgorithm[] = [
     name: "A* Algorithm",
     fn: dijkstra,
   },
-  {
-    name: "Dijkstra's Algorithm",
-    fn: dijkstra,
-  },
 ];
 
 export const TOUR_STEPS: Step[] = [

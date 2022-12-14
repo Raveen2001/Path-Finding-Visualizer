@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { ReactComponent as SunIcon } from "../../assets/svg/sun.svg";
-import { ReactComponent as MoonIcon } from "../../assets/svg/moon.svg";
+import { ReactComponent as SunIcon } from "../../../assets/svg/sun.svg";
+import { ReactComponent as MoonIcon } from "../../../assets/svg/moon.svg";
 import "./ThemeSwitcher.scss";
-import useLocalStorage from "../../utils/useLocalStorage";
-import { Theme } from "../../models";
+import useLocalStorage from "../../../utils/useLocalStorage";
+import { Theme } from "../../../models";
 
 const ThemeSwitcher = ({ ...props }) => {
   const [theme, setTheme] = useLocalStorage<Theme>("theme", "light");
