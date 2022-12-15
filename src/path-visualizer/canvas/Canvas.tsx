@@ -18,6 +18,7 @@ const Canvas = () => {
     setGraph,
     path,
     updateVisualization,
+    drawWeightedNode,
   } = usePathVisualizerCanvasContext()!;
 
   const currentDragHoverElement = useRef<number>();
@@ -44,8 +45,8 @@ const Canvas = () => {
     ) => {
       if (drawWall.current && !isStartNode && !isEndNode) {
         let updatedGraph;
-        if (e.shiftKey) {
-          updatedGraph = graph.addWeightToWall(idx);
+        if (drawWeightedNode || e.shiftKey) {
+          updatedGraph = graph.addWeightToNode(idx);
         } else {
           updatedGraph = graph.changeNodeToWall(idx);
         }
@@ -54,7 +55,7 @@ const Canvas = () => {
         currentDragHoverElement.current = idx;
       }
     },
-    [graph]
+    [graph, drawWeightedNode]
   );
 
   const onDragEnd = useCallback(

@@ -47,7 +47,7 @@ export const TOUR_STEPS: Step[] = [
     target: "#canvas",
     title: "Canvas",
     content: "Canvas for visualization",
-    placement: "auto",
+    placement: "center",
   },
 
   {
@@ -67,14 +67,20 @@ export const TOUR_STEPS: Step[] = [
   {
     target: "#canvas",
     title: "Wall",
-    content: "click and drag to drag walls",
-    placement: "auto",
+    content: "click and drag to draw walls",
+    placement: "center",
   },
 
   {
     target: "#canvas",
     title: "Weighted node",
-    content: "click + shift and drag to drag weighted nodes",
+    content: "click + shift and drag to draw weighted nodes",
+    placement: "center",
+  },
+  {
+    target: "#weightedNode",
+    title: "Weighted Node",
+    content: "Click to enable/disable drawing weighted nodes",
     placement: "auto",
   },
   {

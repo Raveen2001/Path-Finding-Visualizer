@@ -45,6 +45,9 @@ export interface IPathVisualizerCanvasContext {
   path: NodeModel[];
   setPath: TSetState<NodeModel[]>;
 
+  drawWeightedNode: boolean;
+  setDrawWeightedNode: TSetState<boolean>;
+
   updateVisualization: () => void;
   maxAnimationLevel: number;
 }

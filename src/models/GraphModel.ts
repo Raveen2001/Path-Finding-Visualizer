@@ -43,7 +43,7 @@ export class GraphModel {
     return this.clone();
   }
 
-  public addWeightToWall(id: number) {
+  public addWeightToNode(id: number) {
     const nodePosition = this.getNodePosition(id);
     if (nodePosition === null) return;
 

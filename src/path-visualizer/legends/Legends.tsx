@@ -1,9 +1,14 @@
+import classNames from "classnames";
 import React, { useEffect, useMemo, useState } from "react";
+import { usePathVisualizerCanvasContext } from "../../context/PathVisualizerProvider";
 import { NodeModel } from "../../models";
 import Node from "../node/Node";
 import "./Legends.scss";
 
 const Legends = () => {
+  const { drawWeightedNode, setDrawWeightedNode } =
+    usePathVisualizerCanvasContext()!;
+
   const visitedNode = useMemo(() => new NodeModel(-1, 0, 0).setDistance(1), []);
   const pathNode = useMemo(() => new NodeModel(-1, 0, 0).setDistance(1), []);
   const node = useMemo(() => new NodeModel(-1, 0, 0), []);
@@ -51,9 +56,16 @@ const Legends = () => {
         <Node node={wallNode} path={emptyPath} />
         <span>Wall Node</span>
       </div>
-      <div className="legend">
+      <div
+        id="weightedNode"
+        className={classNames("legend clickable", { active: drawWeightedNode })}
+        onClick={() => setDrawWeightedNode(!drawWeightedNode)}
+      >
         <Node node={weightedNode} path={emptyPath} />
-        <span>Weighted Node</span>
+        <div className="col">
+          <span>Weighted Node</span>
+          <p>Click to enable</p>
+        </div>
       </div>
     </div>
   );

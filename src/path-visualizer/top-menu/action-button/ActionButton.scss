@@ -20,17 +20,18 @@
     opacity: 0;
   }
 
-  &:hover {
-    box-shadow: 0 0 5px 1px var(--accent-color);
-
-    .label {
-      margin-left: 5px;
-      width: 50px;
-      opacity: 1;
-    }
-  }
-
   svg {
     fill: var(--accent-color) !important;
+  }
+  @media (hover: hover) {
+    &:hover {
+      box-shadow: 0 0 5px 1px var(--accent-color);
+
+      .label {
+        margin-left: 5px;
+        width: 50px;
+        opacity: 1;
+      }
+    }
   }
 }

@@ -48,6 +48,7 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
   const [maxAnimationLevel, setMaxAnimationLevel] = useState<number>(0);
 
   const [showTour, setShowTour] = useLocalStorage<boolean>("showTour", true);
+  const [drawWeightedNode, setDrawWeightedNode] = useState<boolean>(false);
 
   const hasVisualizedOnce = useRef<boolean>(false);
 
@@ -142,6 +143,8 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
           setGraph,
           path,
           setPath,
+          drawWeightedNode,
+          setDrawWeightedNode,
           updateVisualization,
           maxAnimationLevel,
         }}

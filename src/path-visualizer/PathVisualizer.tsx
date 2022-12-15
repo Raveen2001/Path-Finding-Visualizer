@@ -6,11 +6,12 @@ import Canvas from "./canvas/Canvas";
 import Legends from "./legends/Legends";
 import TopMenu from "./top-menu/TopMenu";
 import "./PathVisualizer.scss";
+import classNames from "classnames";
 
 const PathVisualizer = () => {
   const { showTour, handleTourCallback } = usePathVisualizerOptionsContext()!;
   return (
-    <div className="Path-Visualizer">
+    <div className={classNames("Path-Visualizer", { "no-scroll": showTour })}>
       <TopMenu />
       <Canvas />
       <Legends />

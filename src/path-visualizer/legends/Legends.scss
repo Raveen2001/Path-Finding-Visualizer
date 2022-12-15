@@ -4,11 +4,31 @@
   height: var(--legends-section-height);
   display: flex;
   justify-content: space-around;
-
+  margin-bottom: 10px;
+  .clickable {
+    cursor: pointer;
+  }
   .legend {
+    padding: 0px 10px;
     display: flex;
     gap: 10px;
     align-items: center;
+
+    .col {
+      display: flex;
+      flex-direction: column;
+
+      p {
+        font-size: small;
+
+        padding: 0;
+        line-height: 1;
+        margin: 0;
+      }
+    }
+  }
+  .active {
+    background-color: var(--hover-color);
   }
 
   @media (max-width: $layout-breakpoint) {
@@ -19,6 +39,5 @@
     justify-self: center;
     row-gap: 10px;
     overflow-y: scroll;
-    margin-bottom: 10px;
   }
 }
