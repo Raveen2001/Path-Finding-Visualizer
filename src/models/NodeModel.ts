@@ -2,6 +2,11 @@ import _ from "lodash";
 
 export class NodeModel {
   id: number;
+  x: number;
+  y: number;
+  g: number;
+  h: number;
+  f: number;
   distance: number;
   adjacentNodes: NodeModel[];
   isWall: boolean;
@@ -9,27 +14,51 @@ export class NodeModel {
   previousNode: NodeModel | null;
   animationLevel: number;
 
-  public constructor(id: number) {
+  public constructor(id: number, x: number, y: number) {
     this.id = id;
+    this.x = x;
+    this.y = x;
     this.distance = Infinity;
     this.adjacentNodes = [];
     this.isWall = false;
     this.weight = 1;
     this.animationLevel = 0;
     this.previousNode = null;
+    this.g = Infinity;
+    this.h = Infinity;
+    this.f = Infinity;
   }
 
   public addAdjacentNode(node: NodeModel) {
     this.adjacentNodes.push(node);
   }
 
-  public update(previousNode: NodeModel) {
+  public prepareNodeForAlgorithm() {
+    this.distance = Infinity;
+    this.animationLevel = 0;
+    this.previousNode = null;
+    this.g = Infinity;
+    this.h = Infinity;
+    this.f = Infinity;
+  }
+
+  public update(previousNode: NodeModel, targetNode: NodeModel) {
     const updatedDistance = previousNode.distance + this.weight;
+    const updatedG = previousNode.g + this.weight;
     if (this.distance > updatedDistance) {
       this.distance = updatedDistance;
       this.previousNode = previousNode;
       this.animationLevel = previousNode.animationLevel + 1;
+      this.g = updatedG;
+      this.h = this.calculateHvalue(targetNode);
+      this.f = this.g + this.h;
     }
+  }
+
+  private calculateHvalue(targetNode: NodeModel): number {
+    const h = Math.abs(this.x - targetNode.x) + Math.abs(this.y - targetNode.y);
+
+    return h;
   }
 
   public setDistance(distance: number) {

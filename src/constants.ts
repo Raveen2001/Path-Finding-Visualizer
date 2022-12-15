@@ -1,5 +1,5 @@
 import { Step, Styles } from "react-joyride";
-import { dijkstra } from "./algorithms/dijkstra";
+import { dijkstra, aStar } from "./algorithms";
 import { TAlgorithm } from "./models";
 
 export const ALGORITHMS: TAlgorithm[] = [
@@ -10,7 +10,7 @@ export const ALGORITHMS: TAlgorithm[] = [
 
   {
     name: "A* Algorithm",
-    fn: dijkstra,
+    fn: aStar,
   },
 ];
 

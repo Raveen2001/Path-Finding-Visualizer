@@ -1,6 +1,6 @@
 import { GraphModel, NodeModel } from "../models";
 
-export const dijkstra = (
+export const aStar = (
   graph: GraphModel,
   startId: number,
   endId: number
@@ -36,6 +36,5 @@ export const dijkstra = (
       queue.sort((a, b) => a.distance - b.distance);
     }
   }
-
   return [graph.clone(), path, maxAnimationLevelReached];
 };

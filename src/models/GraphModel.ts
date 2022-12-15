@@ -55,31 +55,37 @@ export class GraphModel {
     return this.clone();
   }
 
-  public prepareMatrixForAlgorithm(startId: number): NodeModel | null {
+  public prepareMatrixForAlgorithm(
+    startId: number,
+    endId: number
+  ): [NodeModel | null, NodeModel | null] {
     let startNode = null;
+    let endNode = null;
 
     for (let i = 0; i < this.matrix.length; i++) {
       for (let j = 0; j < this.matrix[0].length; j++) {
-        const isStartingNode = this.matrix[i][j].id == startId;
-        if (isStartingNode) {
-          this.matrix[i][j].setDistance(0);
-          startNode = this.matrix[i][j];
-        } else {
-          this.matrix[i][j].setDistance(Infinity);
-        }
+        const node = this.matrix[i][j];
+        const isStartingNode = node.id == startId;
+        const isEndingNode = node.id == endId;
 
-        this.matrix[i][j].setPreviousNode(null);
-        this.matrix[i][j].setAnimationLevel(0);
+        node.prepareNodeForAlgorithm();
+        if (isStartingNode) {
+          node.setDistance(0);
+          startNode = node;
+        }
+        if (isEndingNode) {
+          endNode = node;
+        }
       }
     }
 
-    return startNode;
+    return [startNode, endNode];
   }
 
   private buildGraph(row: number, col: number) {
     const matrix = _.range(row).map((row_idx) => {
       return _.range(col).map(
-        (col_idx) => new NodeModel(row_idx * col + col_idx)
+        (col_idx) => new NodeModel(row_idx * col + col_idx, row_idx, col_idx)
       );
     });
 
