@@ -9,7 +9,7 @@ export const aStar = (
   let path: NodeModel[] = [];
   const visitedNodes = new Set();
   let maxAnimationLevelReached = 0;
-  let currentAnimationLevel = 0;
+  // let currentAnimationLevel = 0;
 
   if (startNode && endNode) {
     const queue = [startNode];
@@ -18,11 +18,11 @@ export const aStar = (
     while (queue.length > 0) {
       const node = queue.shift() as NodeModel;
 
-      node.animationLevel = currentAnimationLevel;
-      currentAnimationLevel += 0.5;
-      node.isVisited = true;
+      // node.animationLevel = currentAnimationLevel;
+      // currentAnimationLevel += 0.5;
+      // node.isVisited = true;
 
-      maxAnimationLevelReached = currentAnimationLevel;
+      maxAnimationLevelReached = node.animationLevel;
       if (node.id == endId) {
         let currentNode = node;
         while (currentNode.previousNode != null) {
@@ -35,12 +35,12 @@ export const aStar = (
       node.adjacentNodes.forEach((adjacentNode) => {
         if (!adjacentNode.isWall && !visitedNodes.has(adjacentNode.id)) {
           adjacentNode.update(node, startNode, endNode);
-          adjacentNode.isVisited = false;
+          adjacentNode.animationLevel = node.animationLevel + 1;
           visitedNodes.add(adjacentNode.id);
           queue.push(adjacentNode);
         }
       });
-      queue.sort((a, b) => a.h - b.h);
+      queue.sort((a, b) => a.f - b.f);
     }
   }
   return [graph.clone(), path, maxAnimationLevelReached];
