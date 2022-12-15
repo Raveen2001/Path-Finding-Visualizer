@@ -18,6 +18,7 @@ import useGrid from "../utils/useGrid";
 import { showToast } from "../utils/toast";
 import { CallBackProps, STATUS } from "react-joyride";
 import useLocalStorage from "../utils/useLocalStorage";
+import { toast } from "react-toastify";
 
 const PathVisualizerOptionsContext =
   createContext<IPathVisualizerOptionsContext | null>(null);
@@ -69,16 +70,31 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
       startNodeId,
       endNodeId
     );
-    setGraph(updatedGraph);
-    setPath(path);
-    setMaxAnimationLevel(maxAnimationLevel);
 
+    toast.dismiss();
     if (path.length === 0) {
       setTimeout(
         () => showToast("No path found"),
         maxAnimationLevel * 100 + 1000
       );
+    } else {
+      const fullAnimationTime =
+        maxAnimationLevel * 100 + path.length * 100 + 1500;
+      setTimeout(
+        () =>
+          showToast(
+            "Total distance Travelled: " +
+              path
+                .slice(1, path.length - 1)
+                .reduce((sum, cur) => cur.weight + sum, 0)
+          ),
+        fullAnimationTime
+      );
     }
+
+    setGraph(updatedGraph);
+    setPath(path);
+    setMaxAnimationLevel(maxAnimationLevel);
 
     hasVisualizedOnce.current = true;
   }, [selectedAlgorithmIdx, startNodeId, endNodeId, graph]);

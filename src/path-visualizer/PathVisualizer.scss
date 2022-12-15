@@ -4,3 +4,9 @@
   height: 100vh;
   width: 100vw;
 }
+
+kbd {
+  background-color: var(--hover-color);
+  padding: 2px 5px;
+  border-radius: 5px;
+}

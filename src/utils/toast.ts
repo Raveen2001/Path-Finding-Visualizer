@@ -1,5 +1,6 @@
-import { toast } from "react-toastify";
+import { Id, toast } from "react-toastify";
 
-export const showToast = (msg: string) => {
-  toast(msg);
+export const showToast = (msg: string): Id => {
+  toast.dismiss();
+  return toast(msg);
 };

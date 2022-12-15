@@ -11,11 +11,11 @@ import { ReactComponent as PlayIcon } from "../../assets/svg/play.svg";
 import { ReactComponent as ProfileIcon } from "../../assets/svg/profile.svg";
 import { ReactComponent as InfoIcon } from "../../assets/svg/info.svg";
 import { ReactComponent as RefreshIcon } from "../../assets/svg/refresh.svg";
+import { showToast } from "../../utils/toast";
 
 const TopMenu = () => {
   const {
     algorithms,
-    selectedAlgorithmIdx,
     setSelectedAlgorithmIdx,
     startVisualization,
     startTour,
@@ -79,7 +79,9 @@ const TopMenu = () => {
         />
         <ActionButton
           id="profile"
-          onClick={() => {}}
+          onClick={() => {
+            showToast("Portfolio is under constructions!");
+          }}
           icon={<ProfileIcon />}
           label={"Profile"}
         />

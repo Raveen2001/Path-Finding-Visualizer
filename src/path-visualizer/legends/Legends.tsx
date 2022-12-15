@@ -64,7 +64,7 @@ const Legends = () => {
         <Node node={weightedNode} path={emptyPath} />
         <div className="col">
           <span>Weighted Node</span>
-          <p>Click to enable</p>
+          <p>Click to {drawWeightedNode ? "disable" : "enable"}</p>
         </div>
       </div>
     </div>

@@ -67,14 +67,23 @@ export const TOUR_STEPS: Step[] = [
   {
     target: "#canvas",
     title: "Wall",
-    content: "click and drag to draw walls",
+    content: (
+      <p>
+        <kbd>Click and drag</kbd> to draw walls.
+      </p>
+    ),
     placement: "center",
   },
 
   {
     target: "#canvas",
     title: "Weighted node",
-    content: "click + shift and drag to draw weighted nodes",
+    content: (
+      <p>
+        <kbd>Click + shift and drag</kbd> to draw weighted nodes. A random value
+        will be assigned for each node from 1 - 10.
+      </p>
+    ),
     placement: "center",
   },
   {
@@ -86,7 +95,7 @@ export const TOUR_STEPS: Step[] = [
   {
     title: "Reset Canvas",
     target: "#reset",
-    content: "Click this to reset the canvas",
+    content: "Click to reset the canvas",
     placement: "auto",
   },
   {

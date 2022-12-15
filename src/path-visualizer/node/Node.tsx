@@ -6,6 +6,7 @@ import { ReactComponent as EndIcon } from "../../assets/svg/end.svg";
 import "./Node.scss";
 import Beacon from "./beacon/Beacon";
 import { usePathVisualizerCanvasContext } from "../../context/PathVisualizerProvider";
+import { toast } from "react-toastify";
 
 interface INode {
   node: NodeModel;
@@ -70,6 +71,7 @@ const Node: React.FC<INode> = ({
         timeoutIds.push(timeoutId2);
       } else {
         timeoutId = setTimeout(() => {
+          toast.dismiss();
           nodeRef.current?.classList.add("spread-animation");
         }, time);
       }
@@ -80,6 +82,7 @@ const Node: React.FC<INode> = ({
         const pathTime = timeForSpreadAnimation + path.indexOf(node) * 100;
 
         let timeoutId = setTimeout(() => {
+          toast.dismiss();
           nodeRef.current?.classList.add("path-node", "path-animation");
         }, pathTime);
 
