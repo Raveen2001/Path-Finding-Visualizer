@@ -5,6 +5,7 @@ import { ReactComponent as StartIcon } from "../../assets/svg/start.svg";
 import { ReactComponent as EndIcon } from "../../assets/svg/end.svg";
 import "./Node.scss";
 import Beacon from "./beacon/Beacon";
+import { usePathVisualizerCanvasContext } from "../../context/PathVisualizerProvider";
 
 interface INode {
   node: NodeModel;
@@ -40,6 +41,7 @@ const Node: React.FC<INode> = ({
   onDragEnd,
   ...props
 }) => {
+  const { maxAnimationLevel } = usePathVisualizerCanvasContext()!;
   const nodeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -50,11 +52,10 @@ const Node: React.FC<INode> = ({
       "path-animation"
     );
 
-    const isNodeVisited = Number.isFinite(node.distance);
     const isWeightedNode = node.weight > 1;
     const timeoutIds: number[] = [];
 
-    if (isNodeVisited && !isStartNode && !isEndNode) {
+    if (node.isVisited && !isStartNode && !isEndNode) {
       const time = node.animationLevel * 100;
       let timeoutId;
       if (isWeightedNode) {
@@ -75,9 +76,8 @@ const Node: React.FC<INode> = ({
       timeoutIds.push(timeoutId);
 
       if (path.includes(node)) {
-        const timeForSpreadAnimation =
-          path[path.length - 1].animationLevel * 100 + 1500;
-        const pathTime = timeForSpreadAnimation + node.animationLevel * 100;
+        const timeForSpreadAnimation = maxAnimationLevel * 100 + 1000;
+        const pathTime = timeForSpreadAnimation + path.indexOf(node) * 100;
 
         let timeoutId = setTimeout(() => {
           nodeRef.current?.classList.add("path-node", "path-animation");

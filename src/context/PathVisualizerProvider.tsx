@@ -45,6 +45,7 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
   const [endNodeId, setEndNodeId] = useState<number>(0);
   const [graph, setGraph] = useState<GraphModel>(new GraphModel(0, 0));
   const [path, setPath] = useState<NodeModel[]>([]);
+  const [maxAnimationLevel, setMaxAnimationLevel] = useState<number>(0);
 
   const [showTour, setShowTour] = useLocalStorage<boolean>("showTour", true);
 
@@ -69,6 +70,7 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
     );
     setGraph(updatedGraph);
     setPath(path);
+    setMaxAnimationLevel(maxAnimationLevel);
 
     if (path.length === 0) {
       setTimeout(
@@ -141,6 +143,7 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
           path,
           setPath,
           updateVisualization,
+          maxAnimationLevel,
         }}
       >
         {children}

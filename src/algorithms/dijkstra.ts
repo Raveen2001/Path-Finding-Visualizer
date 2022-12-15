@@ -28,7 +28,8 @@ export const dijkstra = (
 
       node.adjacentNodes.forEach((adjacentNode) => {
         if (!adjacentNode.isWall && !visitedNodes.has(adjacentNode.id)) {
-          adjacentNode.update(node, endNode);
+          adjacentNode.update(node, startNode, endNode);
+          adjacentNode.animationLevel = node.animationLevel + 1;
           visitedNodes.add(adjacentNode.id);
           queue.push(adjacentNode);
         }
@@ -36,6 +37,6 @@ export const dijkstra = (
       queue.sort((a, b) => a.distance - b.distance);
     }
   }
-
+  console.log(visitedNodes);
   return [graph.clone(), path, maxAnimationLevelReached];
 };

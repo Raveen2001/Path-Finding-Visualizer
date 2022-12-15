@@ -11,14 +11,16 @@ export class NodeModel {
   adjacentNodes: NodeModel[];
   isWall: boolean;
   weight: number;
+  isVisited: boolean;
   previousNode: NodeModel | null;
   animationLevel: number;
 
   public constructor(id: number, x: number, y: number) {
     this.id = id;
     this.x = x;
-    this.y = x;
+    this.y = y;
     this.distance = Infinity;
+    this.isVisited = false;
     this.adjacentNodes = [];
     this.isWall = false;
     this.weight = 1;
@@ -37,25 +39,30 @@ export class NodeModel {
     this.distance = Infinity;
     this.animationLevel = 0;
     this.previousNode = null;
+    this.isVisited = false;
     this.g = Infinity;
     this.h = Infinity;
     this.f = Infinity;
   }
 
-  public update(previousNode: NodeModel, targetNode: NodeModel) {
+  public update(
+    previousNode: NodeModel,
+    sourceNode: NodeModel,
+    targetNode: NodeModel
+  ) {
     const updatedDistance = previousNode.distance + this.weight;
     const updatedG = previousNode.g + this.weight;
     if (this.distance > updatedDistance) {
       this.distance = updatedDistance;
       this.previousNode = previousNode;
-      this.animationLevel = previousNode.animationLevel + 1;
+      this.isVisited = true;
       this.g = updatedG;
       this.h = this.calculateHvalue(targetNode);
       this.f = this.g + this.h;
     }
   }
 
-  private calculateHvalue(targetNode: NodeModel): number {
+  public calculateHvalue(targetNode: NodeModel): number {
     const h = Math.abs(this.x - targetNode.x) + Math.abs(this.y - targetNode.y);
 
     return h;

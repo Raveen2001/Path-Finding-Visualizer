@@ -71,6 +71,9 @@ export class GraphModel {
         node.prepareNodeForAlgorithm();
         if (isStartingNode) {
           node.setDistance(0);
+          node.g = 0;
+          node.h = 0;
+          node.f = 0;
           startNode = node;
         }
         if (isEndingNode) {

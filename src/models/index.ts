@@ -46,4 +46,5 @@ export interface IPathVisualizerCanvasContext {
   setPath: TSetState<NodeModel[]>;
 
   updateVisualization: () => void;
+  maxAnimationLevel: number;
 }
