@@ -85,8 +85,8 @@ const PathVisualizerProvider: React.FC<IPathVisualizerProvider> = ({
           showToast(
             "Total distance Travelled: " +
               path
-                .slice(1, path.length - 1)
-                .reduce((sum, cur) => cur.weight + sum, 0)
+                .slice(0, path.length - 1)
+                .reduce((sum, cur) => cur.weight + sum, 1)
           ),
         fullAnimationTime
       );
