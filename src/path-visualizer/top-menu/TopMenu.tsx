@@ -80,7 +80,7 @@ const TopMenu = () => {
         <ActionButton
           id="profile"
           onClick={() => {
-            showToast("Portfolio is under constructions!");
+            window.open("raveen.in", "_blank", "noopener,noreferrer");
           }}
           icon={<ProfileIcon />}
           label={"Profile"}
